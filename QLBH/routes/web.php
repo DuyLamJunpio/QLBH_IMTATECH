@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\ProfileCtrl;
 use App\Http\Controllers\AuthController;
 
 /*
@@ -42,4 +43,8 @@ Route::middleware('auth')->group(function () {
     Route::match(['GET', 'POST'], '/categories/add', [CategoriesController::class, 'store'])->name('categories.add');
     Route::match(['GET', 'POST'], '/categories/edit/{id}', [CategoriesController::class, 'edit'])->name('categories.edit');
     Route::get('/categories.delete/{id}', [CategoriesController::class, 'destroy'])->name('categories.delete');
+
+    //profile
+    Route::match(['GET', 'POST'], '/profile', [ProfileCtrl::class, 'index'])->name('profile.index');
+
 });

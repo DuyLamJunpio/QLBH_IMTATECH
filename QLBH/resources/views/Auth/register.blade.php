@@ -48,6 +48,30 @@
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>
+                                <div class="form-group">
+                                    <input name="phone" type="text"
+                                        class="form-control form-control-user @error('phone')is-invalid @enderror"
+                                        id="exampleInputName" placeholder="Phone">
+                                    @error('phone')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <input name="add" type="text"
+                                        class="form-control form-control-user @error('add')is-invalid @enderror"
+                                        id="exampleInputName" placeholder="Address">
+                                    @error('add')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
+                                    <input name="img" type="text"
+                                        class="form-control form-control-user @error('img')is-invalid @enderror"
+                                        id="exampleInputName" placeholder="Image">
+                                    @error('img')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
+                                </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input name="password" type="password"

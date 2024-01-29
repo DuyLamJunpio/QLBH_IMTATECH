@@ -23,6 +23,9 @@ class AuthController extends Controller
         Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email',
+            'phone' => 'required',
+            'add' => 'required',
+            'img' => 'required',
             'password' => 'required|confirmed'
         ])->validate();
         Hash::make($request->password);
@@ -52,6 +55,9 @@ class AuthController extends Controller
             ]);
         }
 
+        $user = Auth::user();
+        $request->session()->put('user_id', $user->id);
+        
         $request->session()->regenerate();
 
         return redirect()->route('products.index');
