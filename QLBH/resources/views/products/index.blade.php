@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('content')
-    <div class="container mt-5">
+    <div class="container mt-5 overflow-auto" style="max-height: 600px">
         <div class="card">
             <div class="card-header">
                 <div class="row">
