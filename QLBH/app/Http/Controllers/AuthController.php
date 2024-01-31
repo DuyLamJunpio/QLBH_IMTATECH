@@ -27,7 +27,12 @@ class AuthController extends Controller
         ])->validate();
         Hash::make($request->password);
         try {
-            User::create($request->all());
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => '0'
+            ]);
         } catch (Throwable $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
