@@ -30,6 +30,12 @@ Route::get('trangchu',function () {
     return view('user.home');
 })->name('trangchu');
 
+// Route::get('sanpham',function () {
+//     return view('user.products');
+// })->name('sanpham');
+
+Route::get('sanpham', [ProductController::class, 'show'])->name('User.products');
+
 Route::middleware('admin')->group(function () {
     //products
     Route::get('/', [ProductController::class, 'index'])->name('products.index');
