@@ -58,15 +58,6 @@
                                             <span class="invalid-feedback">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    <div class="form-group" role="group" aria-label="Basic radio toggle button group">
-                                        <input type="radio" class="btn-check" name="role" id="btnradio1"
-                                            autocomplete="off" value="1" checked>
-                                        <label class="btn btn-outline-primary" for="btnradio1">Admin</label>
-
-                                        <input type="radio" class="btn-check" name="role" id="btnradio2"
-                                            autocomplete="off" value="0">
-                                        <label class="btn btn-outline-primary" for="btnradio2">Staff</label>
-                                    </div>
                                 </div>
                                 <button type="submit" class="btn btn-info w-100  btn-user">Register
                                     Account</button>
