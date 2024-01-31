@@ -27,16 +27,16 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('products.index');
-    })->name('products.index');
+Route::get('trangchu',function () {
+    return view('user.home');
+})->name('trangchu');
 
+Route::middleware('admin')->group(function () {
     //products
     Route::get('/', [ProductController::class, 'index'])->name('products.index');
     Route::match(['GET', 'POST'], '/add', [ProductController::class, 'store'])->name('products.add');
     Route::match(['GET', 'POST'], '/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
-    Route::get('/product.delete/{id}', [ProductController::class, 'destroy'])->name('products.delete');
+    Route::get('delete/{id}', [ProductController::class, 'destroy'])->name('products.delete');
 
     //categories
     Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
