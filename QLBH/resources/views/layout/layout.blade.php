@@ -10,35 +10,10 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="/fontawesome-free-6.5.1-web/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('resources/css/layout.css') }}">
 </head>
 
 <body>
-    <style>
-        .btn-lg {
-            width: 55px;
-            height: 55px;
-            border-radius: 30px;
-            align-items: center;
-            justify-content: center;
-            display: flex;
-            border-width: 0px;
-            box-shadow: 3px 10px 15px rgba(0.1, 0.1, 0.1, 0.1);
-            transition: all 0.3s ease 0s;
-            background-color: #cdf3fa;
-        }
-
-        .btn-lg:hover {
-            background-color: #2ee59d;
-            box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
-            color: #fff;
-            transform: translateY(-7px);
-        }
-
-        .btn-lg:active {
-            opacity: 0;
-        }
-    </style>
     <div class="sidebar close">
         <div class="logo-details">
             <i class='bx bxl-amazon'></i>
@@ -46,7 +21,7 @@
         </div>
         <ul class="nav-links">
             <li>
-                <a href="/">
+                <a href="{{ route('products.index') }}">
                     <i class='bx bx-grid-alt'></i>
                     <span class="link_name">Products</span>
                 </a>
@@ -56,13 +31,24 @@
             </li>
             <li>
                 <div class="iocn-link">
-                    <a href="categories">
+                    <a href="{{ route('categories.index') }}">
                         <i class='bx bx-collection'></i>
                         <span class="link_name">Categories</span>
                     </a>
                 </div>
                 <ul class="sub-menu blank">
                     <li><a class="link_name" href="#">Categories</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="iocn-link">
+                    <a href="{{ route('user_management.index') }}">
+                        <i class='bx bx-user'></i>
+                        <span class="link_name">User Management</span>
+                    </a>
+                </div>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="">User management</a></li>
                 </ul>
             </li>
             <li>
@@ -104,39 +90,14 @@
             </div>
         </div>
     </section>
-    <script>
-        let arrow = document.querySelectorAll(".arrow");
-        for (var i = 0; i < arrow.length; i++) {
-            arrow[i].addEventListener("click", (e) => {
-                let arrowParent = e.target.parentElement.parentElement; //selecting main parent of arrow
-                arrowParent.classList.toggle("showMenu");
-            });
-        }
-
-        let sidebar = document.querySelector(".sidebar");
-        let sidebarBtn = document.querySelector(".bx-menu");
-        console.log(sidebarBtn);
-        sidebarBtn.addEventListener("click", () => {
-            sidebar.classList.toggle("close");
-        });
-    </script>
+    <script src="{{ asset('resources/js/layout.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
-    <script>
-        $(document).ready(function() {
-            $('#image').change(function() {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#preview-image').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(this.files[0]);
-            });
-        });
-    </script>
+    <script src="{{ asset('resources/js/upload_img.js') }}"></script>
 </body>
 
 </html>

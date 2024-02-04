@@ -36,6 +36,8 @@ class ProductController extends Controller
             $validate = $request->validate([
                 'name' => 'required|max:25',
                 'price'=> 'required|integer',
+                'cost'=> 'required|integer',
+                'inventory'=> 'required|integer',
             ]);
             $params = $request->except('_token');
             if ($request->hasFile('image')) {
@@ -65,8 +67,10 @@ class ProductController extends Controller
         $product = Product::find($id);
         if ($request->isMethod('POST')) {
             $validate = $request->validate([
-                'name' => 'required',
-                'price'=> 'required',
+                'name' => 'required|max:25',
+                'price'=> 'required|integer',
+                'cost'=> 'required|integer',
+                'inventory'=> 'required|integer',
             ]);
             $params = $request->except('_token');
             if ($request->hasFile('image')) {

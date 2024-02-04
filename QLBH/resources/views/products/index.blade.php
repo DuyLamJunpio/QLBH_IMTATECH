@@ -25,7 +25,9 @@
                             <th class="text-center">STT</th>
                             <th class="text-center">Name</th>
                             <th class="text-center">Image</th>
+                            <th class="text-center">Cost</th>
                             <th class="text-center">Price</th>
+                            <th class="text-center">Inventory</th>
                             <th class="text-center">Categories</th>
                             <th class="text-center">Description</th>
                             <th class="text-center">Tool</th>
@@ -38,7 +40,9 @@
                                 <td class="text-center">{{ $item->name }}</td>
                                 <td class="text-center"><img src="{{ Storage::url($item->image) }}" width="100"
                                         alt=""></td>
+                                <td class="text-center">{{ $item->cost }}</td>
                                 <td class="text-center">{{ $item->price }}</td>
+                                <td class="text-center">{{ $item->inventory }}</td>
                                 <td class="text-center">{{ $item->categories_name }}</td>
                                 <td class="text-center">{{ $item->description }}</td>
                                 <td class="text-center">
