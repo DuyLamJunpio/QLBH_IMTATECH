@@ -29,8 +29,16 @@
                                     style="max-width: 300px; border-radius:5px; height:250px">
                             </div>
                             <div class="form-group">
+                                <strong>Cost</strong>
+                                <input type="number" name="cost" class="form-control" placeholder="enter cost">
+                            </div>
+                            <div class="form-group">
                                 <strong>Price</strong>
                                 <input type="number" name="price" class="form-control" placeholder="enter price">
+                            </div>
+                            <div class="form-group">
+                                <strong>Inventory</strong>
+                                <input type="number" name="inventory" class="form-control" placeholder="enter inventory">
                             </div>
                             <div class="form-group">
                                 <strong>Description</strong>

@@ -26,10 +26,10 @@
                             <form action="{{ route('register.save') }}" method="POST" class="user">
                                 @csrf
                                 <div class="form-group mb-2">
-                                    <input name="name" type="text"
-                                        class="form-control form-control-user @error('name')is-invalid @enderror"
-                                        id="exampleInputName" placeholder="Name">
-                                    @error('name')
+                                    <input name="fullname" type="text"
+                                        class="form-control form-control-user @error('fullname')is-invalid @enderror"
+                                        id="exampleInputName" placeholder="Fullname">
+                                    @error('fullname')
                                         <span class="invalid-feedback">{{ $message }}</span>
                                     @enderror
                                 </div>
