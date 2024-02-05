@@ -20,9 +20,7 @@
                 <div class="col-3 mb-5">
                     <div class="container ">
                         <div class="card" style="width: 18rem;">
-                            <img src="{{ asset('images/itemprod.png') }}" width="50" class="card-img-top"
-                                alt="">
-                            {{-- <img src="{{ Storage::url($item->image) }}" width="50" alt=""> --}}
+                            <img src="{{ Storage::url($item->image) }}" width="50" class="card-img-top" alt="">
                             <div class="card-body">
                                 <h5 class="card-title ">{{ $item->name }}</h5>
                                 <p class="card-text text-black-50" style="font-weight: 600">${{ $item->price }}</p>

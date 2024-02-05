@@ -35,6 +35,7 @@ Route::get('trangchu',function () {
 // })->name('sanpham');
 
 Route::get('sanpham', [ProductController::class, 'show'])->name('User.products');
+Route::get('sanpham/detail', [ProductController::class, 'show'])->name('User.detailprod');
 
 Route::middleware('admin')->group(function () {
     //products

@@ -31,6 +31,15 @@ class ProductController extends Controller
         return view("User.products", compact("product"))->with('i',(request()->input('page',1)-1) *5);
     }
 
+    public function showDetail()
+    {
+        $product = DB::table('products')
+            ->join('categories', 'products.cat_id', '=', 'categories.id')
+            ->select('products.*', 'categories.name AS categories_name')
+            ->get();
+        return view("User.detailprod", compact("product"));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
