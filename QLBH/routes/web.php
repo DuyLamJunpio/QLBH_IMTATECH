@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,4 +48,8 @@ Route::middleware('admin')->group(function () {
     //user management
     Route::get('/user_management', [UserController::class, 'index'])->name('user_management.index');
     Route::get('/user_management/detail/{id}', [UserController::class, 'show'])->name('user_management.detail');
+
+    // profile
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+
 });
