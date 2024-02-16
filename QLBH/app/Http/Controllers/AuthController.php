@@ -21,17 +21,20 @@ class AuthController extends Controller
     public function registerSave(Request $request)
     {
         Validator::make($request->all(), [
-            'name' => 'required',
+            'fullname' => 'required',
             'email' => 'required|email',
-            'password' => 'required|confirmed'
+            'password' => 'required|confirmed',
         ])->validate();
-        Hash::make($request->password);
         try {
             User::create([
-                'name' => $request->name,
+                'fullname' => $request->fullname,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'role' => '0'
+                'role' => '0',
+                'address' => '',
+                'phone' => '',
+                'age' => '',
+                'image' => '',
             ]);
         } catch (Throwable $e) {
             return redirect()->back()->with('error', $e->getMessage());

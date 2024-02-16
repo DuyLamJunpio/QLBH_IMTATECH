@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('content')
-    <div class="container">
+    <div class="container overflow-auto" style="max-height: 500px">
         <div class="card">
             <div class="card-header">
                 <div class="row">
@@ -29,8 +29,16 @@
                                     style="max-width: 300px; border-radius:5px; height:250px">
                             </div>
                             <div class="form-group">
+                                <strong>Cost</strong>
+                                <input type="number" name="cost" class="form-control" placeholder="enter cost" value="{{ $product->cost }}">
+                            </div>
+                            <div class="form-group">
                                 <strong>Price</strong>
                                 <input type="number" name="price" class="form-control" placeholder="enter price" value="{{ $product->price }}">
+                            </div>
+                            <div class="form-group">
+                                <strong>Inventory</strong>
+                                <input type="number" name="inventory" class="form-control" placeholder="enter inventory" value="{{ $product->inventory }}">
                             </div>
                             <div class="form-group">
                                 <strong>Description</strong>
