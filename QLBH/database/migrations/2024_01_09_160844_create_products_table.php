@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('image');
-            $table->integer('price');
+            $table->bigInteger('price');
+            $table->bigInteger('cost');
+            $table->integer('inventory');
             $table->text('description');
             $table->integer('cat_id');
             $table->timestamps();

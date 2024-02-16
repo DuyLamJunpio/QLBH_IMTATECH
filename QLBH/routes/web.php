@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,7 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::get('trangchu',function () {
-    return view('user.home');
+    return view('User.index');
 })->name('trangchu');
 
 // Route::get('sanpham',function () {
@@ -35,7 +36,7 @@ Route::get('trangchu',function () {
 // })->name('sanpham');
 
 Route::get('sanpham', [ProductController::class, 'show'])->name('User.products');
-Route::get('sanpham/detail', [ProductController::class, 'show'])->name('User.detailprod');
+Route::get('detail/{id}', [ProductController::class, 'showDetail'])->name('User.detailprod');
 
 Route::middleware('admin')->group(function () {
     //products
@@ -49,4 +50,8 @@ Route::middleware('admin')->group(function () {
     Route::match(['GET', 'POST'], '/categories/add', [CategoriesController::class, 'store'])->name('categories.add');
     Route::match(['GET', 'POST'], '/categories/edit/{id}', [CategoriesController::class, 'edit'])->name('categories.edit');
     Route::get('/categorie.delete/{id}', [CategoriesController::class, 'destroy'])->name('categories.delete');
+
+    //user management
+    Route::get('/user_management', [UserController::class, 'index'])->name('user_management.index');
+    Route::get('/user_management/detail/{id}', [UserController::class, 'show'])->name('user_management.detail');
 });

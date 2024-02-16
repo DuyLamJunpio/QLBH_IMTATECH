@@ -31,12 +31,15 @@ class ProductController extends Controller
         return view("User.products", compact("product"))->with('i',(request()->input('page',1)-1) *5);
     }
 
-    public function showDetail()
+    public function showDetail(string $id)
     {
-        $product = DB::table('products')
-            ->join('categories', 'products.cat_id', '=', 'categories.id')
-            ->select('products.*', 'categories.name AS categories_name')
-            ->get();
+        
+        // $product = DB::table('products')
+        //     ->join('categories', 'products.cat_id', '=', 'categories.id')
+        //     ->select('products.*', 'categories.name AS categories_name')
+        //     ->get();
+        $product = Product::find($id);
+        $product->get();
         return view("User.detailprod", compact("product"));
     }
 
@@ -55,6 +58,8 @@ class ProductController extends Controller
             $validate = $request->validate([
                 'name' => 'required|max:25',
                 'price'=> 'required|integer',
+                'cost'=> 'required|integer',
+                'inventory'=> 'required|integer',
             ]);
             $params = $request->except('_token');
             if ($request->hasFile('image')) {
@@ -84,8 +89,10 @@ class ProductController extends Controller
         $product = Product::find($id);
         if ($request->isMethod('POST')) {
             $validate = $request->validate([
-                'name' => 'required',
-                'price'=> 'required',
+                'name' => 'required|max:25',
+                'price'=> 'required|integer',
+                'cost'=> 'required|integer',
+                'inventory'=> 'required|integer',
             ]);
             $params = $request->except('_token');
             if ($request->hasFile('image')) {
@@ -113,7 +120,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $deleteImg = Storage::delete($product->image);
-        $product->delete();
+            
         return redirect()->back()->with('success', 'Delete product successfully!');
     }
 }
