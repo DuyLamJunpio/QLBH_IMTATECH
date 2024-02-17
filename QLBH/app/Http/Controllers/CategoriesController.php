@@ -13,7 +13,7 @@ class CategoriesController extends Controller
      */
     public function index()
     {
-        $categories = Categories::where('delete_at','!=',null)->paginate(5);
+        $categories = Categories::paginate(5);
         return view("categories.index", compact("categories"))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 

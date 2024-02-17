@@ -21,6 +21,28 @@ class ProductController extends Controller
         return view("products.index", compact("product"))->with('i',(request()->input('page',1)-1) *5);
     }
 
+
+    public function show()
+    {
+        $product = DB::table('products')
+            ->join('categories', 'products.cat_id', '=', 'categories.id')
+            ->select('products.*', 'categories.name AS categories_name')
+            ->get();
+        return view("User.products", compact("product"))->with('i',(request()->input('page',1)-1) *5);
+    }
+
+    public function showDetail(string $id)
+    {
+        
+        // $product = DB::table('products')
+        //     ->join('categories', 'products.cat_id', '=', 'categories.id')
+        //     ->select('products.*', 'categories.name AS categories_name')
+        //     ->get();
+        $product = Product::find($id);
+        $product->get();
+        return view("User.detailprod", compact("product"));
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -98,7 +120,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $deleteImg = Storage::delete($product->image);
-        $product->delete();
+            
         return redirect()->back()->with('success', 'Delete product successfully!');
     }
 }

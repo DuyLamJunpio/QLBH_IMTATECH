@@ -38,8 +38,7 @@
                             <tr>
                                 <td class="text-center">{{ ++$i }}</td>
                                 <td class="text-center">{{ $item->name }}</td>
-                                <td class="text-center"><img src="{{ Storage::url($item->image) }}" width="100"
-                                        alt=""></td>
+                                <td class="text-center"><img src="{{ Storage::url($item->image) }}" width="50" alt=""></td>
                                 <td class="text-center">{{ $item->cost }}</td>
                                 <td class="text-center">{{ $item->price }}</td>
                                 <td class="text-center">{{ $item->inventory }}</td>
