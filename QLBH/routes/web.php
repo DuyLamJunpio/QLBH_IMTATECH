@@ -17,6 +17,13 @@ use App\Http\Controllers\ProfileController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('trangchu',function () {return view('User.index');})->name('trangchu');
+Route::match(['GET', 'POST'],'profile',[ProfileController::class, 'edit'])->name('profile');
+Route::get('user_profile',function () {return view('User.file');})->name('user_profile');
+Route::get('user_change_password',function () {return view('User.change_pw');})->name('change_password');
+Route::match(['GET', 'POST'],'change_password',[ProfileController::class, 'change_pw'])->name('change_pw');
+
 //Auth
 Route::controller(AuthController::class)->group(function () {
     Route::get('register', 'register')->name('register');
@@ -28,6 +35,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
 
+<<<<<<< HEAD
+=======
 Route::get('trangchu',function () {
     return view('User.index');
 })->name('trangchu');
@@ -39,6 +48,7 @@ Route::get('trangchu',function () {
 Route::get('sanpham', [ProductController::class, 'show'])->name('User.products');
 Route::get('detail/{id}', [ProductController::class, 'showDetail'])->name('User.detailprod');
 
+>>>>>>> 1230d6a1ba5fc1e11fd6a2e67a5fb6797cf95516
 Route::middleware('admin')->group(function () {
     //products
     Route::get('/', [ProductController::class, 'index'])->name('products.index');
