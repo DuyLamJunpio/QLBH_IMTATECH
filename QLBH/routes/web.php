@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StatisticController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,5 +59,8 @@ Route::middleware('admin')->group(function () {
 
     // profile
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    
+    // profile
+    Route::get('/statistic', [StatisticController::class, 'index'])->name('statistic.index');
 
 });

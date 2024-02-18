@@ -15,6 +15,10 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.css">
 
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/bs-brain@2.0.3/components/cards/card-1/assets/css/card-1.css">
+
 </head>
 
 <body>
@@ -55,6 +59,18 @@
                     <li><a class="link_name" href="">User management</a></li>
                 </ul>
             </li>
+
+            <li>
+                <div class="iocn-link">
+                    <a href="{{ route('statistic.index') }}">
+                        <i class='bx bx-chart'></i>
+                        <span class="link_name">Statistic</span>
+                    </a>
+                </div>
+                <ul class="sub-menu blank">
+                    <li><a class="link_name" href="">Statistic</a></li>
+                </ul>
+            </li>
             <li>
                 <div class="profile-details">
                     <a href="{{ route('profile.index') }}">
@@ -63,8 +79,8 @@
                                 alt="profileImg">
                         </div>
                         <div class="name-job">
-                            <div class="profile_name">Đào Duy Lâm</div>
-                            <div class="job">Admin</div>
+                            <div class="profile_name">{{ auth()->user()->name }}</div>
+                            <div class="job">{{ auth()->user()->role }}</div>
                         </div>
                     </a>
 
