@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +17,13 @@ use App\Http\Controllers\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('trangchu',function () {return view('User.index');})->name('trangchu');
+Route::match(['GET', 'POST'],'profile',[ProfileController::class, 'edit'])->name('profile');
+Route::get('user_profile',function () {return view('User.file');})->name('user_profile');
+Route::get('user_change_password',function () {return view('User.change_pw');})->name('change_password');
+Route::match(['GET', 'POST'],'change_password',[ProfileController::class, 'change_pw'])->name('change_pw');
+
 //Auth
 Route::controller(AuthController::class)->group(function () {
     Route::get('register', 'register')->name('register');
@@ -26,10 +34,6 @@ Route::controller(AuthController::class)->group(function () {
 
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
-
-Route::get('trangchu',function () {
-    return view('User.index');
-})->name('trangchu');
 
 Route::middleware('admin')->group(function () {
     //products

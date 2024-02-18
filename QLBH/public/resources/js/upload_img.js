@@ -5,5 +5,6 @@ $(document).ready(function() {
             $('#preview-image').attr('src', e.target.result);
         }
         reader.readAsDataURL(this.files[0]);
+        console.log(this.files[0]);
     });
 });

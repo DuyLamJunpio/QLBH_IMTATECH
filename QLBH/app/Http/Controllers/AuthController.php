@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Storage;
 use Throwable;
 
 class AuthController extends Controller
@@ -34,7 +35,7 @@ class AuthController extends Controller
                 'address' => '',
                 'phone' => '',
                 'age' => '',
-                'image' => '',
+                'image' => 'pubilc/images/icons8-user-48.png',
             ]);
         } catch (Throwable $e) {
             return redirect()->back()->with('error', $e->getMessage());
