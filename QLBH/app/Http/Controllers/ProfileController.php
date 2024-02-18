@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+<<<<<<< HEAD
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -96,3 +97,30 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 }
+=======
+use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+use Throwable;
+
+class ProfileController extends Controller{
+    public function index()
+    {
+        // $userId = session('user_id');
+        // $user = User::find($userId);
+
+        return view("profile.profile"); // ['user' => $user]
+    }
+    
+    public function editPass()
+    {
+        // $userId = session('user_id');
+        // $user = User::find($userId);
+
+        return view("profile.editPass"); // ['user' => $user]
+    }
+}
+>>>>>>> 1230d6a1ba5fc1e11fd6a2e67a5fb6797cf95516
