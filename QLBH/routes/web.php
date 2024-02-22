@@ -36,20 +36,20 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
 
-<<<<<<< HEAD
-=======
-Route::get('trangchu',function () {
-    return view('User.index');
-})->name('trangchu');
+// <<<<<<< HEAD
+// =======
+// Route::get('trangchu',function () {
+//     return view('User.index');
+// })->name('trangchu');
 
-// Route::get('sanpham',function () {
-//     return view('user.products');
-// })->name('sanpham');
+// // Route::get('sanpham',function () {
+// //     return view('user.products');
+// // })->name('sanpham');
 
-Route::get('sanpham', [ProductController::class, 'show'])->name('User.products');
-Route::get('detail/{id}', [ProductController::class, 'showDetail'])->name('User.detailprod');
+// Route::get('sanpham', [ProductController::class, 'show'])->name('User.products');
+// Route::get('detail/{id}', [ProductController::class, 'showDetail'])->name('User.detailprod');
 
->>>>>>> 1230d6a1ba5fc1e11fd6a2e67a5fb6797cf95516
+// >>>>>>> 1230d6a1ba5fc1e11fd6a2e67a5fb6797cf95516
 Route::middleware('admin')->group(function () {
     //products
     Route::get('/', [ProductController::class, 'index'])->name('products.index');
