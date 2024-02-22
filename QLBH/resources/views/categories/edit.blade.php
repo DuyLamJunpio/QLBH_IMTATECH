@@ -14,13 +14,14 @@
                 </div>
             </div>
             <div class="card-body">
-                <form action="{{ route('categories.edit',['id'=>$categories->id]) }}" method="POST">
+                <form action="{{ route('categories.edit', ['id' => $categories->id]) }}" method="POST">
                     @csrf
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
                                 <strong>Categories name</strong>
-                                <input type="text" name="name" class="form-control" placeholder="enter categories name" value="{{ $categories->name }}">
+                                <input type="text" name="name" class="form-control"
+                                    placeholder="enter categories name" value="{{ $categories->name }}">
                             </div>
                         </div>
                         <button type='submit' class='btn btn-success mt-2'>Submit</button>
