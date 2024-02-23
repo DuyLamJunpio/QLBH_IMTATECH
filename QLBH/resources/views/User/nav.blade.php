@@ -1,19 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IMTA TECH</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="/fontawesome-free-6.5.1-web/css/all.min.css">
-</head>
-
-<body>
     <!-- Navbar  -->
-    <nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark p-md-3">
+    <nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark p-md-3 bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#">IMTA TECH</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -53,28 +39,14 @@
         </div>
     </nav>
 
-    <div class="body">
-        @include('User.intro')
-    </div>
-
-    @include('User.about')
-    @include('User.footer')
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
-    <script type="text/javascript">
-        var nav = document.querySelector('nav');
-
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 100) {
-                nav.classList.add('bg-dark', 'shadow');
+    <script>
+        var element = document.getElementById('menudropdown');
+        document.getElementById('btndropdown').addEventListener('click', function() {
+            var display = window.getComputedStyle(element).getPropertyValue('display');
+            if (display === 'none') {
+                element.style.display = 'block';
             } else {
-                nav.classList.remove('bg-dark', 'shadow');
+                element.style.display = 'none';
             }
         });
     </script>
-</body>
-
-</html>

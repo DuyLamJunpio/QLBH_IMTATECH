@@ -17,43 +17,13 @@
 
 
 <body>
-    <!-- Navbar  -->
-    <nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark p-md-3 bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">IMTA TECH</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="mx-auto"></div>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="/sanpham">Product</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Cart</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    @include('User.nav');
 
     <div style="width: 100%; height: 100px;"></div>
 
     <!-- Block content - Đục lỗ trên giao diện bố cục chung, đặt tên là `content` -->
-    <div class="container">
-        <div class="row py-2 ">
+    <div class="container col-8 justify-content-center">
+        <div class="row py-2">
             <h3 class="">Detail Product</h3>
         </div>
         <div class="card">
@@ -65,40 +35,23 @@
                     <input type="hidden" name="sp_gia" id="sp_gia" value="10990000.00">
                     <input type="hidden" name="hinhdaidien" id="hinhdaidien" value="samsung-galaxy-tab-10.jpg">
 
-                    <div class="wrapper row">
-                        <div class="col-md-6 col-lg-5 d-none d-md-block ">
-                            <img src="{{ Storage::url($product->image) }}" style="width: 400px; height: 400px;"
-                                alt="login form" class="img-fluid mt-5 ms-2" style="border-radius: 1rem 0 0 1rem;" />
+                    <div class="wrapper row col-10">
+                        <div class="col-6 d-none d-md-block ">
+                            <img src="{{ Storage::url($product->image) }}" width="50" height="350" class="card-img-top my-2 rounded"
+                            alt="">
                         </div>
                         <div class="details col-md-6">
                             <h2 class="fw-bold text-dark">{{ $product->name }}</h2>
-                            <div class="rating">
-                                <div class="stars">
-                                    <i class='bx bxs-star' style='color:#2345de'></i>
-                                    <i class='bx bxs-star' style='color:#2345de'></i>
-                                    <i class='bx bxs-star' style='color:#2345de'></i>
-                                    <i class='bx bx-star' style='color:#2345de'></i>
-                                    <i class='bx bx-star' style='color:#2345de'></i>
-                                </div>
-                                <span class="review-no">999 reviews</span>
-                            </div>
-                            <small class="text-muted">Giá cũ: <s><span>10,990,000.00 vnđ</span></s></small>
                             <h4 class="price">Giá hiện tại: <span id="priceDisplay"
                                     style='color:#2345de'>{{ $product->price }}</span><span style='color:#2345de'>
                                     VNĐ</span></h4>
-                            <h5 class="colors">colors:
-                                <span class="color orange not-available" data-toggle="tooltip"
-                                    title="Hết hàng"></span>
-                                <span class="color green"></span>
-                                <span class="color blue"></span>
-                            </h5>
                             <h5 class="colors">Số lượng : </h5>
                             <div class="row" style="width: 140px;">
                                 <div class="input-group ">
                                     <button class="btn btn-outline-secondary" type="button"
                                         id="subtract-btn">-</button>
-                                    <input type="text" class="form-control text-center" id="counter-input"
-                                        value="0" readonly>
+                                    <input type="text" class="form-control text-center" id="counter-input" min="1"
+                                        value="1" readonly>
                                     <button class="btn btn-outline-secondary" type="button"
                                         id="add-btn">+</button>
                                 </div>
@@ -106,7 +59,7 @@
                             <p>{{ $product->inventory }} sản phẩm có sẵn</p>
                             <div class="action" style="width: 400px;">
                                 <a class="btn btn-outline-primary w-50 mt-2" >Thêm vào giỏ hàng</a>
-                                <a class="btn btn-danger w-50 mt-2">Mua ngay</a>
+                                <a class="btn btn-danger w-50 mt-2" onclick="sendValueToBlade" href="{{ route('order', ['id' => $product->id])}}">Mua ngay</a>
                                 <a class="btn btn-danger mt-2" href="#"><i class='bx bxs-heart'
                                         style='color:#ffffff'></i></a>
                             </div>

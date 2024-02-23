@@ -80,11 +80,11 @@
         </div>
         <div class="mt-5">
             <div class="container mt-3">
-                @if (session('success'))
+                {{-- @if (session('success'))
                     <div class="alert alert-primary">
                         {{ session('success') }}
                     </div>
-                @endif
+                @endif --}}
 
                 @if ($errors->any())
                     <div class="alert alert-danger">
