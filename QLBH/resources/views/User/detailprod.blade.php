@@ -18,36 +18,7 @@
 
 <body>
     <!-- Navbar  -->
-    <nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark p-md-3 bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">IMTA TECH</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="mx-auto"></div>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="/sanpham">Product</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Contact</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Cart</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    @include('User.nav')
 
     <div style="width: 100%; height: 100px;"></div>
 
@@ -92,7 +63,7 @@
                                 <span class="color green"></span>
                                 <span class="color blue"></span>
                             </h5>
-                            <h5 class="colors">Số lượng : </h5>
+                            <h5>Số lượng : </h5>
                             <div class="row" style="width: 140px;">
                                 <div class="input-group ">
                                     <button class="btn btn-outline-secondary" type="button"

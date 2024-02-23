@@ -35,8 +35,6 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
 
-<<<<<<< HEAD
-=======
 Route::get('trangchu',function () {
     return view('User.index');
 })->name('trangchu');
@@ -48,7 +46,6 @@ Route::get('trangchu',function () {
 Route::get('sanpham', [ProductController::class, 'show'])->name('User.products');
 Route::get('detail/{id}', [ProductController::class, 'showDetail'])->name('User.detailprod');
 
->>>>>>> 1230d6a1ba5fc1e11fd6a2e67a5fb6797cf95516
 Route::middleware('admin')->group(function () {
     //products
     Route::get('/', [ProductController::class, 'index'])->name('products.index');
@@ -67,6 +64,6 @@ Route::middleware('admin')->group(function () {
     Route::get('/user_management/detail/{id}', [UserController::class, 'show'])->name('user_management.detail');
 
     // profile
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profileadmin', [ProfileController::class, 'index'])->name('profile.index');
 
 });

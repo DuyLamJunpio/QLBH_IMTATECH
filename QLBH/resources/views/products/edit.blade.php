@@ -46,16 +46,11 @@
                                     placeholder="enter description" value="{{ $product->description }}">
                             </div>
                             <strong>Categories</strong>
-                            <div class="form-group">
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                    @foreach ($categories as $item)
-                                        <input type="radio" class="btn-check" name="cat_id" id="{{ $item->id }}"
-                                            autocomplete="off" value="{{ $item->id }}" {{ $product->cat_id == $item->id ? 'checked' : '' }}>
-                                        <label class="btn btn-outline-primary"
-                                            for="{{ $item->id }}">{{ $item->name }}</label>
-                                    @endforeach
-                                </div>
-                            </div>
+                            <select class="form-select mt-2" aria-label="Default select example" name="cat_id">
+                                @foreach ($categories as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <button type='submit' class='btn btn-success mt-2'>Submit</button>
                     </div>
