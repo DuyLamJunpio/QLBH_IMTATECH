@@ -56,7 +56,7 @@ class ProductController extends Controller
         $categories = DB::table("categories")->get();
         if ($request->isMethod('POST')) {
             $validate = $request->validate([
-                'name' => 'required|max:25',
+                'name' => 'required|max:50',
                 'price'=> 'required|integer',
                 'cost'=> 'required|integer',
                 'inventory'=> 'required|integer',
@@ -89,7 +89,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         if ($request->isMethod('POST')) {
             $validate = $request->validate([
-                'name' => 'required|max:25',
+                'name' => 'required|max:50',
                 'price'=> 'required|integer',
                 'cost'=> 'required|integer',
                 'inventory'=> 'required|integer',
@@ -120,7 +120,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $deleteImg = Storage::delete($product->image);
-            
+        $product -> delete();     
         return redirect()->back()->with('success', 'Delete product successfully!');
     }
 }
