@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -13,10 +13,10 @@ use Throwable;
 class StatisticController extends Controller{
     public function index()
     {
-        // $userId = session('user_id');
-        // $user = User::find($userId);
-
-        return view("statistic.index"); // ['user' => $user]
+        $products = Product::all();
+        $totalInventory = $products->sum('inventory');
+        $totalCost = $products->sum('cost');
+        return view("statistic.index", compact('totalInventory', 'totalCost')); 
     }
     
     // public function editPass()

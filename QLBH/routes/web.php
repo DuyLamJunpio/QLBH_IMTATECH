@@ -48,7 +48,7 @@ Route::middleware('admin')->group(function () {
     Route::match(['GET', 'POST'], '/profile/edit_pass', [ProfileController::class, 'edit_pass'])->name('profile.edit_pass');
 
     
-    // profile
+    // statistic
     Route::get('/statistic', [StatisticController::class, 'index'])->name('statistic.index');
 
 });

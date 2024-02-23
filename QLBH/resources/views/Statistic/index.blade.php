@@ -11,8 +11,9 @@
                                 <div class="card-body p-4">
                                     <div class="row">
                                         <div class="col-8">
-                                            <h5 class="card-title widget-card-title mb-3">Hóa đơn - 356</h5>
-                                            <h4 class="card-subtitle text-body-secondary m-0">$6,820</h4>
+                                            <h5 class="card-title widget-card-title mb-3">Tồn kho - {{ $totalInventory }}
+                                            </h5>
+                                            <h4 class="card-subtitle text-body-secondary m-0">{{ $totalCost }}vnd</h4>
                                         </div>
                                         <div class="col-4">
                                             <div class="d-flex justify-content-end">
@@ -26,13 +27,13 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="d-flex align-items-center mt-3">
-                                                <span
+                                                {{-- <span
                                                     class="lh-1 me-3 bg-danger-subtle text-danger rounded-circle p-1 d-flex align-items-center justify-content-center">
                                                     <i class="bi bi-arrow-right-short bsb-rotate-45"></i>
-                                                </span>
+                                                </span> --}}
                                                 <div>
-                                                    <p class="fs-7 mb-0">-9%</p>
-                                                    <p class="fs-7 mb-0 text-secondary">giảm so với cùng kỳ tháng trước</p>
+                                                    {{-- <p class="fs-7 mb-0">-9%</p> --}}
+                                                    <p class="fs-7 mb-0 text-secondary">Nhấn để xem chi tiết</p>
                                                 </div>
                                             </div>
                                         </div>
