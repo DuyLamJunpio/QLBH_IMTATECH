@@ -43,8 +43,8 @@ Route::middleware('admin')->group(function () {
     Route::get('/user_management/detail/{id}', [UserController::class, 'show'])->name('user_management.detail');
 
     // profile
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-    Route::match(['GET', 'POST'], '/profile/edit', [ProfileController::class, 'edit1'])->name('profile.edit1');
+    Route::get('/profile', function() {return view('profile.index');})->name('profile.index');
+    Route::match(['GET', 'POST'], '/profile/edit', [ProfileController::class, 'edit_admin'])->name('profile.edit_admin');
     Route::match(['GET', 'POST'], '/profile/edit_pass', [ProfileController::class, 'edit_pass'])->name('profile.edit_pass');
 
     

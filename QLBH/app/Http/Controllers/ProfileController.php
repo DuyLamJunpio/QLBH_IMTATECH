@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -16,16 +15,8 @@ use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
 {
-
-        public function index()
-    {
-        // $userId = session('user_id');
-        // $user = User::find($userId);
-
-        return view("profile.index"); // ['user' => $user]
-    }
     
-    public function edit1(Request $request)
+    public function edit_admin(Request $request)
     {
         $id = Auth::user()->id;
         $profile = User::find($id);
