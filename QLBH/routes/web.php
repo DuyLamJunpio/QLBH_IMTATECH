@@ -7,17 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\StatisticController;
 
 Route::get('trangchu',function () {return view('User.index');})->name('trangchu');
 Route::get('cart',function () {return view('User.cart');})->name('cart');
@@ -41,6 +31,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
 
+
 Route::get('sanpham', [ProductController::class, 'show'])->name('User.products');
 Route::get('detail/{id}', [ProductController::class, 'showDetail'])->name('User.detailprod');
 
@@ -62,6 +53,8 @@ Route::middleware('admin')->group(function () {
     Route::get('/user_management/detail/{id}', [UserController::class, 'show'])->name('user_management.detail');
 
     // profile
-    Route::get('/profileadmin', [ProfileController::class, 'index'])->name('profile.index');
-
+    Route::get('/profile', function() {return view('profile.index');})->name('profile.index');
+    Route::match(['GET', 'POST'], '/profile/edit', [ProfileController::class, 'edit_admin'])->name('profile.edit_admin');
+    Route::match(['GET', 'POST'], '/profile/edit_pass', [ProfileController::class, 'edit_pass'])->name('profile.edit_pass');
+    Route::get('/statistic', [StatisticController::class, 'index'])->name('statistic.index');
 });

@@ -13,8 +13,8 @@
 </head>
 
 <body>
-
     @include('User.nav');
+
 
     <div style="width: 100%; height: 100px;"></div>
 
