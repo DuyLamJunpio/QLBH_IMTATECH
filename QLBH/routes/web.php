@@ -50,5 +50,4 @@ Route::middleware('admin')->group(function () {
     
     // statistic
     Route::get('/statistic', [StatisticController::class, 'index'])->name('statistic.index');
-
 });
