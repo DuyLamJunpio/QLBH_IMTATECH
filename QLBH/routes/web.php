@@ -4,14 +4,20 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatisticController;
 
 Route::get('trangchu',function () {return view('User.index');})->name('trangchu');
+Route::get('cart',function () {return view('User.cart');})->name('cart');
+Route::match(['GET', 'POST'],'order/{id}',[OrderController::class, 'showDetail'])->name('order');
 Route::match(['GET', 'POST'],'profile',[ProfileController::class, 'edit'])->name('profile');
 Route::get('user_profile',function () {return view('User.file');})->name('user_profile');
+Route::get('user_purchase',[OrderController::class, 'index'])->name('user_purchase');
+Route::get('purchase/delete/{id}', [OrderController::class, 'destroy'])->name('user_purchase.delete');
 Route::get('user_change_password',function () {return view('User.change_pw');})->name('change_password');
+Route::post('post_bill',[OrderController::class, 'store'])->name('post_bill');
 Route::match(['GET', 'POST'],'change_password',[ProfileController::class, 'change_pw'])->name('change_pw');
 
 //Auth
@@ -24,6 +30,10 @@ Route::controller(AuthController::class)->group(function () {
 
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
+
+
+Route::get('sanpham', [ProductController::class, 'show'])->name('User.products');
+Route::get('detail/{id}', [ProductController::class, 'showDetail'])->name('User.detailprod');
 
 Route::middleware('admin')->group(function () {
     //products
@@ -46,9 +56,5 @@ Route::middleware('admin')->group(function () {
     Route::get('/profile', function() {return view('profile.index');})->name('profile.index');
     Route::match(['GET', 'POST'], '/profile/edit', [ProfileController::class, 'edit_admin'])->name('profile.edit_admin');
     Route::match(['GET', 'POST'], '/profile/edit_pass', [ProfileController::class, 'edit_pass'])->name('profile.edit_pass');
-
-    // statistic
     Route::get('/statistic', [StatisticController::class, 'index'])->name('statistic.index');
-    Route::get('/profileadmin', [ProfileController::class, 'index'])->name('profile.index');
-
 });

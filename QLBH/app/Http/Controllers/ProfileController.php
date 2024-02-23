@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
 {
-    
     public function edit_admin(Request $request)
     {
         $id = Auth::user()->id;

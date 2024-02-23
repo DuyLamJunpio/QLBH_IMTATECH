@@ -51,13 +51,15 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="{{ route('User.products') }}">
+
+                        <a class="nav-link text-white" href="{{ route('User.products')}}">
+
                             <i class='bx bx-package text-white'></i>
                             Product
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">
+                        <a class="nav-link text-white" href="{{ route('cart')}}">
                             <i class='bx bx-cart text-white'></i>
                             Cart
                         </a>
