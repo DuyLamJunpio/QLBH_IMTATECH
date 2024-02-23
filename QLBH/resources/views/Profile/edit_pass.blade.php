@@ -1,11 +1,11 @@
-@extends('User.profile')
+@extends('layout.layout')
 
 @section('content')
     <div class="card mb-4">
         <div class="card-body">
             <h3>Đổi mật khẩu</h3>
             <hr>
-            <form action="{{ route('change_pw') }}" method="POST">
+            <form action="{{ route('profile.edit_pass') }}" method="POST">
                 @csrf
                 <div class="form-group mb-2">
                     <input name="oldpassword" type="password"

@@ -6,17 +6,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\StatisticController;
 
 Route::get('trangchu',function () {return view('User.index');})->name('trangchu');
 Route::match(['GET', 'POST'],'profile',[ProfileController::class, 'edit'])->name('profile');
@@ -34,17 +24,6 @@ Route::controller(AuthController::class)->group(function () {
 
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
-
-Route::get('trangchu',function () {
-    return view('User.index');
-})->name('trangchu');
-
-// Route::get('sanpham',function () {
-//     return view('user.products');
-// })->name('sanpham');
-
-Route::get('sanpham', [ProductController::class, 'show'])->name('User.products');
-Route::get('detail/{id}', [ProductController::class, 'showDetail'])->name('User.detailprod');
 
 Route::middleware('admin')->group(function () {
     //products
@@ -64,6 +43,12 @@ Route::middleware('admin')->group(function () {
     Route::get('/user_management/detail/{id}', [UserController::class, 'show'])->name('user_management.detail');
 
     // profile
+    Route::get('/profile', function() {return view('profile.index');})->name('profile.index');
+    Route::match(['GET', 'POST'], '/profile/edit', [ProfileController::class, 'edit_admin'])->name('profile.edit_admin');
+    Route::match(['GET', 'POST'], '/profile/edit_pass', [ProfileController::class, 'edit_pass'])->name('profile.edit_pass');
+
+    // statistic
+    Route::get('/statistic', [StatisticController::class, 'index'])->name('statistic.index');
     Route::get('/profileadmin', [ProfileController::class, 'index'])->name('profile.index');
 
 });
