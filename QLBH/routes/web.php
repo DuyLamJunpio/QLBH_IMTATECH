@@ -56,13 +56,13 @@ Route::middleware('admin')->group(function () {
     Route::get('/statistic', [StatisticController::class, 'index'])->name('statistic.index');
 });
 // profile user
-Route::match(['GET', 'POST'], 'profile', [ProfileController::class, 'edit'])->name('profile');
 Route::get('user_profile', function () {
-    return view('User.file');
+    return view('User.profile.file');
 })->name('user_profile');
+Route::match(['GET', 'POST'], 'user_profile_edit', [ProfileController::class, 'edit'])->name('profile');
 Route::match(['GET', 'POST'], 'change_password', [ProfileController::class, 'change_pw'])->name('change_pw');
 Route::get('user_change_password', function () {
-    return view('User.change_pw');
+    return view('User.profile.change_pw');
 })->name('change_password');
 
 //order
