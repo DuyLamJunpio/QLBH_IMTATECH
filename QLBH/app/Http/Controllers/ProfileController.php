@@ -37,7 +37,7 @@ class ProfileController extends Controller
                 return redirect()->route('profile.index')->with('success', 'Edit profile successfully!');
             }
         }
-        return view("profile.edit");
+        return view("Profile.edit");
     }
 
     public function edit_pass(Request $request)
