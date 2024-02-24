@@ -1,51 +1,7 @@
+@extends('User.home.index')
+
+@section('customer')
     <div class="page-holder">
-        <!-- navbar-->
-        <header class="header bg-white">
-            <div class="container px-lg-3">
-                <nav class="navbar navbar-expand-lg navbar-light py-3 px-lg-0"><a class="navbar-brand"
-                        href="index.html"><span class="fw-bold text-uppercase text-dark">Boutique</span></a>
-                    <button class="navbar-toggler navbar-toggler-end" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation"><span
-                            class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item">
-                                <!-- Link--><a class="nav-link active" href="index.html">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <!-- Link--><a class="nav-link" href="shop.html">Shop</a>
-                            </li>
-                            <li class="nav-item">
-                                <!-- Link--><a class="nav-link" href="detail.html">Product detail</a>
-                            </li>
-                            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown"
-                                    href="#" data-bs-toggle="dropdown" aria-haspopup="true"
-                                    aria-expanded="false">Pages</a>
-                                <div class="dropdown-menu mt-3 shadow-sm" aria-labelledby="pagesDropdown"><a
-                                        class="dropdown-item border-0 transition-link" href="index.html">Homepage</a><a
-                                        class="dropdown-item border-0 transition-link" href="shop.html">Category</a><a
-                                        class="dropdown-item border-0 transition-link" href="detail.html">Product
-                                        detail</a><a class="dropdown-item border-0 transition-link"
-                                        href="cart.html">Shopping cart</a><a
-                                        class="dropdown-item border-0 transition-link" href="checkout.html">Checkout</a>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item"><a class="nav-link" href="cart.html"> <i
-                                        class="fas fa-dolly-flatbed me-1 text-gray"></i>Cart<small
-                                        class="text-gray fw-normal">(2)</small></a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!"> <i
-                                        class="far fa-heart me-1"></i><small class="text-gray fw-normal">
-                                        (0)</small></a></li>
-                            <li class="nav-item"><a class="nav-link" href="#!"> <i
-                                        class="fas fa-user me-1 text-gray fw-normal"></i>Login</a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </header>
         <!--  Modal -->
         <div class="modal fade" id="productView" tabindex="-1">
             <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -54,27 +10,27 @@
                         data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="modal-body p-0">
                         <div class="row align-items-stretch">
-                            <div class="col-lg-6 p-lg-0"><a
-                                    class="glightbox product-view d-block h-100 bg-cover bg-center"
-                                    style="background: url(img/product-5.jpg)" href="img/product-5.jpg"
-                                    data-gallery="gallery1" data-glightbox="Red digital smartwatch"></a><a
-                                    class="glightbox d-none" href="img/product-5-alt-1.jpg" data-gallery="gallery1"
+                            <div class="col-lg-6 p-lg-0"><a class="glightbox product-view d-block h-100 bg-cover bg-center"
+                                    style="background: url({{ asset('assets/product-5.jpg') }})"
+                                    href="{{ asset('assets/product-5.jpg') }}" data-gallery="gallery1"
                                     data-glightbox="Red digital smartwatch"></a><a class="glightbox d-none"
-                                    href="img/product-5-alt-2.jpg" data-gallery="gallery1"
+                                    href="{{ asset('assets/product-5-alt-1.jpg') }}" data-gallery="gallery1"
+                                    data-glightbox="Red digital smartwatch"></a><a class="glightbox d-none"
+                                    href="{{ asset('assets/product-5-alt-2.jpg') }}" data-gallery="gallery1"
                                     data-glightbox="Red digital smartwatch"></a></div>
                             <div class="col-lg-6">
                                 <div class="p-4 my-md-4">
                                     <ul class="list-inline mb-2">
                                         <li class="list-inline-item m-0"><i class="fas fa-star small text-warning"></i>
                                         </li>
-                                        <li class="list-inline-item m-0 1"><i
-                                                class="fas fa-star small text-warning"></i></li>
-                                        <li class="list-inline-item m-0 2"><i
-                                                class="fas fa-star small text-warning"></i></li>
-                                        <li class="list-inline-item m-0 3"><i
-                                                class="fas fa-star small text-warning"></i></li>
-                                        <li class="list-inline-item m-0 4"><i
-                                                class="fas fa-star small text-warning"></i></li>
+                                        <li class="list-inline-item m-0 1"><i class="fas fa-star small text-warning"></i>
+                                        </li>
+                                        <li class="list-inline-item m-0 2"><i class="fas fa-star small text-warning"></i>
+                                        </li>
+                                        <li class="list-inline-item m-0 3"><i class="fas fa-star small text-warning"></i>
+                                        </li>
+                                        <li class="list-inline-item m-0 4"><i class="fas fa-star small text-warning"></i>
+                                        </li>
                                     </ul>
                                     <h2 class="h4">Red digital smartwatch</h2>
                                     <p class="text-muted">$250</p>
@@ -84,17 +40,13 @@
                                         convallis.</p>
                                     <div class="row align-items-stretch mb-4 gx-0">
                                         <div class="col-sm-7">
-                                            <div
-                                                class="border d-flex align-items-center justify-content-between py-1 px-3">
-                                                <span
-                                                    class="small text-uppercase text-gray mr-4 no-select">Quantity</span>
+                                            <div class="border d-flex align-items-center justify-content-between py-1 px-3">
+                                                <span class="small text-uppercase text-gray mr-4 no-select">Quantity</span>
                                                 <div class="quantity">
-                                                    <button class="dec-btn p-0"><i
-                                                            class="fas fa-caret-left"></i></button>
+                                                    <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
                                                     <input class="form-control border-0 shadow-0 p-0" type="text"
                                                         value="1">
-                                                    <button class="inc-btn p-0"><i
-                                                            class="fas fa-caret-right"></i></button>
+                                                    <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -132,13 +84,13 @@
                 </header>
                 <div class="row">
                     <div class="col-md-4"><a class="category-item" href="shop.html"><img class="img-fluid"
-                                src="{{ asset('assets/cat-img-1.jpg') }}"/><strong
+                                src="{{ asset('assets/cat-img-1.jpg') }}" /><strong
                                 class="category-item-title">Clothes</strong></a>
                     </div>
                     <div class="col-md-4"><a class="category-item mb-4" href="shop.html"><img class="img-fluid"
                                 src="{{ asset('assets/cat-img-2.jpg') }}" alt="" /><strong
-                                class="category-item-title">Shoes</strong></a><a class="category-item"
-                            href="shop.html"><img class="img-fluid" src="{{ asset('assets/cat-img-3.jpg') }}" alt="" /><strong
+                                class="category-item-title">Shoes</strong></a><a class="category-item" href="shop.html"><img
+                                class="img-fluid" src="{{ asset('assets/cat-img-3.jpg') }}" alt="" /><strong
                                 class="category-item-title">Watches</strong></a>
                     </div>
                     <div class="col-md-4"><a class="category-item" href="shop.html"><img class="img-fluid"
@@ -159,7 +111,8 @@
                         <div class="product text-center">
                             <div class="position-relative mb-3">
                                 <div class="badge text-white bg-"></div><a class="d-block" href="detail.html"><img
-                                        class="img-fluid w-100" src="img/product-1.jpg" alt="..."></a>
+                                        class="img-fluid w-100" src="{{ asset('assets/product-1.jpg') }}"
+                                        alt="..."></a>
                                 <div class="product-overlay">
                                     <ul class="mb-0 list-inline">
                                         <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark"
@@ -181,8 +134,8 @@
                         <div class="product text-center">
                             <div class="position-relative mb-3">
                                 <div class="badge text-white bg-primary">Sale</div><a class="d-block"
-                                    href="detail.html"><img class="img-fluid w-100" src="img/product-2.jpg"
-                                        alt="..."></a>
+                                    href="detail.html"><img class="img-fluid w-100"
+                                        src="{{ asset('assets/product-2.jpg') }}" alt="..."></a>
                                 <div class="product-overlay">
                                     <ul class="mb-0 list-inline">
                                         <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark"
@@ -204,7 +157,8 @@
                         <div class="product text-center">
                             <div class="position-relative mb-3">
                                 <div class="badge text-white bg-"></div><a class="d-block" href="detail.html"><img
-                                        class="img-fluid w-100" src="img/product-3.jpg" alt="..."></a>
+                                        class="img-fluid w-100" src="{{ asset('assets/product-3.jpg') }}"
+                                        alt="..."></a>
                                 <div class="product-overlay">
                                     <ul class="mb-0 list-inline">
                                         <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark"
@@ -225,8 +179,8 @@
                     <div class="col-xl-3 col-lg-4 col-sm-6">
                         <div class="product text-center">
                             <div class="position-relative mb-3">
-                                <div class="badge text-white bg-info">New</div><a class="d-block"
-                                    href="detail.html"><img class="img-fluid w-100" src="img/product-4.jpg"
+                                <div class="badge text-white bg-info">New</div><a class="d-block" href="detail.html"><img
+                                        class="img-fluid w-100" src="{{ asset('assets/product-4.jpg') }}"
                                         alt="..."></a>
                                 <div class="product-overlay">
                                     <ul class="mb-0 list-inline">
@@ -249,8 +203,8 @@
                         <div class="product text-center">
                             <div class="position-relative mb-3">
                                 <div class="badge text-white bg-danger">Sold</div><a class="d-block"
-                                    href="detail.html"><img class="img-fluid w-100" src="img/product-5.jpg"
-                                        alt="..."></a>
+                                    href="detail.html"><img class="img-fluid w-100"
+                                        src="{{ asset('assets/product-5.jpg') }}" alt="..."></a>
                                 <div class="product-overlay">
                                     <ul class="mb-0 list-inline">
                                         <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark"
@@ -272,7 +226,8 @@
                         <div class="product text-center">
                             <div class="position-relative mb-3">
                                 <div class="badge text-white bg-"></div><a class="d-block" href="detail.html"><img
-                                        class="img-fluid w-100" src="img/product-6.jpg" alt="..."></a>
+                                        class="img-fluid w-100" src="{{ asset('assets/product-6.jpg') }}"
+                                        alt="..."></a>
                                 <div class="product-overlay">
                                     <ul class="mb-0 list-inline">
                                         <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark"
@@ -294,7 +249,8 @@
                         <div class="product text-center">
                             <div class="position-relative mb-3">
                                 <div class="badge text-white bg-"></div><a class="d-block" href="detail.html"><img
-                                        class="img-fluid w-100" src="img/product-7.jpg" alt="..."></a>
+                                        class="img-fluid w-100" src="{{ asset('assets/product-7.jpg') }}"
+                                        alt="..."></a>
                                 <div class="product-overlay">
                                     <ul class="mb-0 list-inline">
                                         <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark"
@@ -316,7 +272,8 @@
                         <div class="product text-center">
                             <div class="position-relative mb-3">
                                 <div class="badge text-white bg-"></div><a class="d-block" href="detail.html"><img
-                                        class="img-fluid w-100" src="img/product-8.jpg" alt="..."></a>
+                                        class="img-fluid w-100" src="{{ asset('assets/product-8.jpg') }}"
+                                        alt="..."></a>
                                 <div class="product-overlay">
                                     <ul class="mb-0 list-inline">
                                         <li class="list-inline-item m-0 p-0"><a class="btn btn-sm btn-outline-dark"
@@ -402,5 +359,6 @@
                 </div>
             </section>
         </div>
-        
+
     </div>
+@endsection

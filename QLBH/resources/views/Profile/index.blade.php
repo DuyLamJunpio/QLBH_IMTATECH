@@ -56,7 +56,7 @@
                     </div>
 
                     <div class="mt-5 text-center">
-                        <a href="{{ route('profile.edit1') }}">
+                        <a href="{{ route('profile.edit_admin') }}">
                             <button class="btn btn-primary profile-button" type='submit'>Sửa</button>
                         </a>
                     </div>
