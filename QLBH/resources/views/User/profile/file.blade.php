@@ -1,4 +1,4 @@
-@extends('User.profile')
+@extends('User.profile.profile')
 
 @section('content')
     <div class="card mb-4">
