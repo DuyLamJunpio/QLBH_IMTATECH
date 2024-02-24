@@ -13,7 +13,6 @@
 </head>
 
 <body>
-    <!-- Navbar  -->
     <nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark p-md-3 bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#">IMTA TECH</a>
@@ -38,7 +37,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">
+                        <a class="nav-link text-white" href="cart">
                             <i class='bx bx-cart text-white'></i>
                             Cart
                         </a>

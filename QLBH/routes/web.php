@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,14 @@ Route::match(['GET', 'POST'],'profile',[ProfileController::class, 'edit'])->name
 Route::get('user_profile',function () {return view('User.file');})->name('user_profile');
 Route::get('user_change_password',function () {return view('User.change_pw');})->name('change_password');
 Route::match(['GET', 'POST'],'change_password',[ProfileController::class, 'change_pw'])->name('change_pw');
+Route::match(['get', 'post'], 'cart', [CartController::class, 'showCart'])->name('cart');
+Route::post('cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::delete('/cart/{productId}', [CartController::class, 'remove'])->name('cart.remove');
+
+
+
+
+
 
 //Auth
 Route::controller(AuthController::class)->group(function () {
@@ -35,20 +44,14 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
 
-<<<<<<< HEAD
-=======
 Route::get('trangchu',function () {
     return view('User.index');
 })->name('trangchu');
 
-// Route::get('sanpham',function () {
-//     return view('user.products');
-// })->name('sanpham');
 
 Route::get('sanpham', [ProductController::class, 'show'])->name('User.products');
 Route::get('detail/{id}', [ProductController::class, 'showDetail'])->name('User.detailprod');
 
->>>>>>> 1230d6a1ba5fc1e11fd6a2e67a5fb6797cf95516
 Route::middleware('admin')->group(function () {
     //products
     Route::get('/', [ProductController::class, 'index'])->name('products.index');
@@ -67,6 +70,6 @@ Route::middleware('admin')->group(function () {
     Route::get('/user_management/detail/{id}', [UserController::class, 'show'])->name('user_management.detail');
 
     // profile
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/profileadmin', [ProfileController::class, 'index'])->name('profile.index');
 
 });

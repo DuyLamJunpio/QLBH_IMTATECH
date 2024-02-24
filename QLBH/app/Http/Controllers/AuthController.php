@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Storage;
 use Throwable;
 
 class AuthController extends Controller
@@ -22,20 +21,17 @@ class AuthController extends Controller
     public function registerSave(Request $request)
     {
         Validator::make($request->all(), [
-            'fullname' => 'required',
+            'name' => 'required',
             'email' => 'required|email',
-            'password' => 'required|confirmed',
+            'password' => 'required|confirmed'
         ])->validate();
+        Hash::make($request->password);
         try {
             User::create([
-                'fullname' => $request->fullname,
+                'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
-                'role' => '0',
-                'address' => '',
-                'phone' => '',
-                'age' => '',
-                'image' => 'pubilc/images/icons8-user-48.png',
+                'role' => '0'
             ]);
         } catch (Throwable $e) {
             return redirect()->back()->with('error', $e->getMessage());

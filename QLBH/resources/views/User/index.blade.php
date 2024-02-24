@@ -31,17 +31,16 @@
                         </a>
                     </li>
                     <li class="nav-item">
-<<<<<<< HEAD
+
                         <a class="nav-link text-white" href="#">
                             <i class='bx bx-package text-white'></i>
                             Product
                         </a>
-=======
                         <a class="nav-link text-white" href="/sanpham">Product</a>
->>>>>>> 1230d6a1ba5fc1e11fd6a2e67a5fb6797cf95516
+
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">
+                        <a class="nav-link text-white" href="cart">
                             <i class='bx bx-cart text-white'></i>
                             Cart
                         </a>
