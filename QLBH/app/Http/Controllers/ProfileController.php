@@ -96,7 +96,7 @@ class ProfileController extends Controller
                 return redirect()->route('profile')->with('success', 'Edit profile successfully!');
             }
         }
-        return view('User.file');
+        return view('User.profile.file');
     }
 
     public function change_pw(Request $request)
@@ -130,7 +130,7 @@ class ProfileController extends Controller
                 return redirect()->route('change_pw');
             }
         }
-        return view('User.change_pw');
+        return view('User.profile.change_pw');
     }
 
     /**

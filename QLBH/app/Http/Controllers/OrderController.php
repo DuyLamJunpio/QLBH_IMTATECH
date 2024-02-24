@@ -22,7 +22,7 @@ class OrderController extends Controller
         ->select('bills.id AS bill_id', 'products.id AS product_id', 'bills.*', 'products.*', 'categories.name AS categories_name')
         ->get();
 
-        return view('User.purchase', compact("records"));
+        return view('User.profile.purchase', compact("records"));
     }
 
     public function showDetail(Request $request, string $id)
@@ -30,7 +30,7 @@ class OrderController extends Controller
         $product = Product::join('categories', 'products.cat_id', '=', 'categories.id')
             ->select('products.*', 'categories.name AS categories_name')
             ->find($id);
-        return view("User.donhang", compact("product"));
+        return view("User.product.donhang", compact("product"));
     }
 
     /**
