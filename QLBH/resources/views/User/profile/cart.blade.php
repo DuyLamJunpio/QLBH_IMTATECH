@@ -185,10 +185,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
-
-
-
     // xoá sản phẩm !!!
     function deleteItem(button, id) {
         var form = document.createElement('form');
