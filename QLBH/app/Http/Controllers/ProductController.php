@@ -18,7 +18,7 @@ class ProductController extends Controller
             ->join('categories', 'products.cat_id', '=', 'categories.id')
             ->select('products.*', 'categories.name AS categories_name')
             ->get();
-        return view("products.index", compact("product"))->with('i',(request()->input('page',1)-1) *5);
+        return view("products.index", compact("product"))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
 
@@ -28,19 +28,15 @@ class ProductController extends Controller
             ->join('categories', 'products.cat_id', '=', 'categories.id')
             ->select('products.*', 'categories.name AS categories_name')
             ->get();
-        return view("User.products", compact("product"))->with('i',(request()->input('page',1)-1) *5);
+        return view("User.product.products", compact("product"))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     public function showDetail(string $id)
     {
-        
-        // $product = DB::table('products')
-        //     ->join('categories', 'products.cat_id', '=', 'categories.id')
-        //     ->select('products.*', 'categories.name AS categories_name')
-        //     ->get();
-        $product = Product::find($id);
-        $product->get();
-        return view("User.detailprod", compact("product"));
+        $product = Product::find($id)->join('categories', 'products.cat_id', '=', 'categories.id')
+        ->select('products.*', 'categories.name AS categories_name')
+        ->first();
+        return view("User.product.detailprod", compact("product"));
     }
 
     /**
@@ -56,10 +52,10 @@ class ProductController extends Controller
         $categories = DB::table("categories")->get();
         if ($request->isMethod('POST')) {
             $validate = $request->validate([
-                'name' => 'required|max:25',
-                'price'=> 'required|integer',
-                'cost'=> 'required|integer',
-                'inventory'=> 'required|integer',
+                'name' => 'required|max:100',
+                'price' => 'required|integer',
+                'cost' => 'required|integer',
+                'inventory' => 'required|integer',
             ]);
             $params = $request->except('_token');
             if ($request->hasFile('image')) {
@@ -89,10 +85,10 @@ class ProductController extends Controller
         $product = Product::find($id);
         if ($request->isMethod('POST')) {
             $validate = $request->validate([
-                'name' => 'required|max:25',
-                'price'=> 'required|integer',
-                'cost'=> 'required|integer',
-                'inventory'=> 'required|integer',
+                'name' => 'required|max:100',
+                'price' => 'required|integer',
+                'cost' => 'required|integer',
+                'inventory' => 'required|integer',
             ]);
             $params = $request->except('_token');
             if ($request->hasFile('image')) {
@@ -105,12 +101,12 @@ class ProductController extends Controller
                     $params['image'] = $product->image;
                 }
             }
-            $result=$product->update($params);
-            if($result){
-                return redirect()->route('products.edit',['id'=>$id])->with('success','Edit product successfully!');
+            $result = $product->update($params);
+            if ($result) {
+                return redirect()->route('products.edit', ['id' => $id])->with('success', 'Edit product successfully!');
             }
         }
-        return view('products.edit', compact('product','categories'));
+        return view('products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -120,7 +116,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         $deleteImg = Storage::delete($product->image);
-            
+        $product->delete();
         return redirect()->back()->with('success', 'Delete product successfully!');
     }
 }

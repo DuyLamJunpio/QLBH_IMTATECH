@@ -51,16 +51,6 @@
                                     <option value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
-                            {{-- <div class="form-group">
-                                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                                    @foreach ($categories as $item)
-                                        <input type="radio" class="btn-check" name="cat_id" id="{{ $item->id }}"
-                                            autocomplete="off" value="{{ $item->id }}" {{ $item->id == 1 ? 'checked' : '' }}>
-                                        <label class="btn btn-outline-primary"
-                                            for="{{ $item->id }}">{{ $item->name }}</label>
-                                    @endforeach
-                                </div>
-                            </div> --}}
                         </div>
                         <button type='submit' class='btn btn-success mt-2'>Submit</button>
                     </div>

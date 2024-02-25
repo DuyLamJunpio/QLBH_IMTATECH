@@ -15,20 +15,65 @@ use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
 {
-    public function index()
-    {
-        // $userId = session('user_id');
-        // $user = User::find($userId);
 
-        return view("profile.profile"); // ['user' => $user]
+    public function edit_admin(Request $request)
+    {
+        $id = Auth::user()->id;
+        $profile = User::find($id);
+        if ($request->isMethod('POST')) {
+            $validate = $request->validate([
+                'fullname' => 'required|max:30',
+                'email' => 'required|email',
+                'phone' => 'required|digits:10',
+                'address' => 'required',
+            ]);
+            $params = $request->except('_token');
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $filename = $image->store('public/images');
+                $params['image'] = $filename;
+            }
+            $result = $profile->update($params);
+            if ($result) {
+                return redirect()->route('profile.index')->with('success', 'Edit profile successfully!');
+            }
+        }
+        return view("Profile.edit");
     }
 
-    public function editPass()
+    public function edit_pass(Request $request)
     {
-        // $userId = session('user_id');
-        // $user = User::find($userId);
+        $id = Auth::user()->id;
+        $user = User::find($id);
 
-        return view("profile.editPass"); // ['user' => $user]
+        if ($request->isMethod('POST')) {
+            $oldPassword = $request->input('oldpassword');
+            if (Hash::check($oldPassword, $user->password)) {
+                $validate = $request->validate([
+                    'password' => 'required|confirmed',
+                ]);
+
+                // Lấy các tham số cần thiết
+                $params = $request->only('password');
+
+                // Cập nhật mật khẩu
+                $result = $user->update([
+                    'password' => Hash::make($params['password']),
+                ]);
+
+                // Kiểm tra kết quả cập nhật
+                if ($result) {
+                    return redirect()->route('profile.index')->with('success', 'Update successfully!');
+                } else {
+                    return back()->withInput()->withErrors(['password' => 'Failed to update password']);
+                }
+            }else{
+                Session::flash('error', 'Sai mật khẩu. Vui lòng thử lại.');
+                return redirect()->route('profile.edit_pass');
+            }
+        }
+        return view('profile.edit_pass');
+
     }
 
     public function edit(Request $request)
@@ -109,4 +154,6 @@ class ProfileController extends Controller
 
         return Redirect::to('/');
     }
+
 }
+

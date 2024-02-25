@@ -4,33 +4,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\CartController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-Route::get('trangchu',function () {return view('User.index');})->name('trangchu');
-Route::match(['GET', 'POST'],'profile',[ProfileController::class, 'edit'])->name('profile');
-Route::get('user_profile',function () {return view('User.file');})->name('user_profile');
-Route::get('user_change_password',function () {return view('User.change_pw');})->name('change_password');
-Route::match(['GET', 'POST'],'change_password',[ProfileController::class, 'change_pw'])->name('change_pw');
-Route::match(['get', 'post'], 'cart', [CartController::class, 'showCart'])->name('cart');
-Route::post('cart/add', [CartController::class, 'add'])->name('cart.add');
-Route::delete('/cart/{productId}', [CartController::class, 'remove'])->name('cart.remove');
-
-
-
-
+Route::get('trangchu', function () {
+    return view('User.home.home');
+})->name('trangchu');
 
 
 //Auth
@@ -43,10 +25,6 @@ Route::controller(AuthController::class)->group(function () {
 
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
-
-Route::get('trangchu',function () {
-    return view('User.index');
-})->name('trangchu');
 
 
 Route::get('sanpham', [ProductController::class, 'show'])->name('User.products');
@@ -69,7 +47,40 @@ Route::middleware('admin')->group(function () {
     Route::get('/user_management', [UserController::class, 'index'])->name('user_management.index');
     Route::get('/user_management/detail/{id}', [UserController::class, 'show'])->name('user_management.detail');
 
-    // profile
-    Route::get('/profileadmin', [ProfileController::class, 'index'])->name('profile.index');
 
+    // profile admin
+    Route::get('/profile_admin', function () {
+        return view('profile.index');
+    })->name('profile.index');
+    Route::match(['GET', 'POST'], '/profile_admin/edit', [ProfileController::class, 'edit_admin'])->name('profile.edit_admin');
+    Route::match(['GET', 'POST'], '/profile_admin/edit_pass', [ProfileController::class, 'edit_pass'])->name('profile.edit_pass');
+
+
+    //thong ke
+    Route::get('/statistic', [StatisticController::class, 'index'])->name('statistic.index');
 });
+// profile user
+Route::match(['GET', 'POST'], 'profile', [ProfileController::class, 'edit'])->name('profile');
+Route::get('user_profile', function () {
+    return view('User.file');
+})->name('user_profile');
+Route::match(['GET', 'POST'], 'change_password', [ProfileController::class, 'change_pw'])->name('change_pw');
+Route::get('user_change_password', function () {
+    return view('User.change_pw');
+})->name('change_password');
+
+//order
+Route::get('cart', function () {
+    return view('User.cart');
+})->name('cart');
+Route::match(['GET', 'POST'], 'order/{id}', [OrderController::class, 'showDetail'])->name('order');
+Route::get('user_purchase', [OrderController::class, 'index'])->name('user_purchase');
+Route::get('purchase/delete/{id}', [OrderController::class, 'destroy'])->name('user_purchase.delete');
+Route::post('post_bill', [OrderController::class, 'store'])->name('post_bill');
+// cart router
+Route::match(['get', 'post'], 'cart', [CartController::class, 'showCart'])->name('cart');
+Route::post('add-to-cart/{id}', [CartController::class, 'add'])->name('add.cart');
+Route::post('/update-quantity-in-session', 'CartController@updateQuantityInSession');
+Route::post('remove-from-cart/{id}', [CartController::class, 'removeFromCart'])->name('remove-from-cart');
+
+

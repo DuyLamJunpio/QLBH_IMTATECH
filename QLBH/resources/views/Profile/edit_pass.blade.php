@@ -1,17 +1,17 @@
-@extends('User.profile')
+@extends('layout.layout')
 
 @section('content')
     <div class="card mb-4">
         <div class="card-body">
             <h3>Đổi mật khẩu</h3>
             <hr>
-            <form action="{{ route('change_pw') }}" method="POST">
+            <form action="{{ route('profile.edit_pass') }}" method="POST">
                 @csrf
                 <div class="form-group mb-2">
                     <input name="oldpassword" type="password"
                         class="form-control form-control-user @error('password')is-invalid @enderror"
                         id="exampleInputPassword" placeholder="Password">
-                        @if (Session::has('error'))
+                    @if (Session::has('error'))
                         <div class="alert alert-danger">
                             {{ Session::get('error') }}
                         </div>

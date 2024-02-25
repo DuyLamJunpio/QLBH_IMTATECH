@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,27 +10,31 @@ use App\Models\Product;
 class CartController extends Controller
 {
 
-    public function remove($index)
+    public function updateQuantityInSession(Request $request)
+    {
+        $quantity = $request->input('quantity');
+        Session::put('cart_quantity', $quantity);
+        return response()->json(['message' => 'Số lượng đã được cập nhật trong session.']);
+    }
+    public function removeFromCart($id)
     {
         $cart = session()->get('cart', []);
     
-        if (isset($cart[$index])) {
-            unset($cart[$index]);
+        if(isset($cart[$id])) {
+            unset($cart[$id]);
             session()->put('cart', $cart);
-            return response()->json(['success' => 'Sản phẩm đã được xóa khỏi giỏ hàng.']);
-        } else {
-            return response()->json(['error' => 'Sản phẩm không tồn tại trong giỏ hàng.']);
         }
+    
+        return redirect()->route('cart');
     }
     
-    
+    public function showCart()
+    {
+        $cart = session()->get('cart', []);
 
-
-    public function showCart(Request $request) {
-        $cart = Session::get('cart', []);    
-        return view('User.cart_shop', compact('cart'));
+        return view('User.profile.cart', compact('cart'));
     }
-    
+
 
     public function add(Request $request)
     {
