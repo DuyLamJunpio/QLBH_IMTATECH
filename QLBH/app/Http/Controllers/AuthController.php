@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
 use Throwable;
 
 class AuthController extends Controller
@@ -16,6 +17,9 @@ class AuthController extends Controller
 
     public function register()
     {
+        if(Auth::check()){
+            return redirect()->route('products.index');
+        }
         return view('auth/register');
     }
 
@@ -45,6 +49,9 @@ class AuthController extends Controller
 
     public function login()
     {
+        if(Auth::check()){
+            return redirect()->route('products.index');
+        }
         return view('auth/login');
     }
 
@@ -66,13 +73,13 @@ class AuthController extends Controller
         return redirect()->route('products.index');
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
-        Auth::guard('web')->logout();
-
-        $request->session()->invalidate();
-
-        return redirect('/login');
+        // Auth::guard('web')->logout();
+        // $request->session()->invalidate();
+        Session::flush();
+        Auth::logout();
+        return redirect()->route('login');
     }
 
     public function profile()

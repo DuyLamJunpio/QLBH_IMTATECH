@@ -45,14 +45,14 @@
                             <!-- Link--><a class="nav-link" href="{{ route('User.products') }}">Shop</a>
                         </li>
                         <li class="nav-item">
-                            <!-- Link--><a class="nav-link" href="shop.html">Contact</a>
+                            <!-- Link--><a class="nav-link" href="#">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <!-- Link--><a class="nav-link" href="detail.html">News</a>
+                            <!-- Link--><a class="nav-link" href="#">News</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a class="nav-link" href="cart.html"> <i
+                        <li class="nav-item"><a class="nav-link" href="#"> <i
                                     class="fas fa-dolly-flatbed me-1 text-gray"></i>Cart<small
                                     class="text-gray fw-normal">(2)</small></a></li>
                         <li class="nav-item"><a class="nav-link" href="#!"> <i class="far fa-heart me-1"></i><small
@@ -73,7 +73,6 @@
 
 
     <!-- JavaScript files-->
-    <script src="{{ asset('js/front.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script>
@@ -84,7 +83,6 @@
         });
     </script>
     <script src=" https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js "></script>
-
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="{{ asset('resources/js/front.js') }}"></script>
     <script>
