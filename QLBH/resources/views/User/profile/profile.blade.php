@@ -1,25 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Profile</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-</head>
-
-<body>
-    @include('User.nav');
-
-
-    <div style="width: 100%; height: 100px;"></div>
-
+@extends('User.home.index')
+@section('customer')
     <section style="background-color: #eee;">
-        <div class="container py-5 mt-5">
+        <div class="container py-5">
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card mb-4">
@@ -59,7 +41,7 @@
                                 </ul>
                                 <li class="list-group-item d-flex align-items-center p-3">
                                     <i class='bx bx-task text-success me-2'></i>
-                                    <a href="{{ route('user_purchase') }}" style="text-decoration: none;">Đơn mua</a>
+                                    <a href="{{ route('user_purchase',['status'=>'all']) }}" style="text-decoration: none;">Đơn mua</a>
                                 </li>
                                 <li class="list-group-item d-flex align-items-center p-3">
                                     <i class='bx bx-log-out text-danger me-2'></i>
@@ -80,97 +62,91 @@
             </div>
         </div>
     </section>
-</body>
+    </body>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-</script>
-
-<script>
-    var contentElements = document.querySelectorAll('.content');
-    var editElements = document.querySelectorAll('.edit');
-    document.getElementById('editButton').addEventListener('click', function() {
-        document.getElementById('save').style.display = 'block';
-        document.getElementById('cancel').style.display = 'block';
-        document.getElementById('chooseImage').style.display = 'block';
-        contentElements.forEach(function(element) {
-            element.style.display = 'none';
-        });
-        editElements.forEach(function(element) {
-            element.style.display = 'block';
-        });
-    });
-
-    document.getElementById('cancel').addEventListener('click', function() {
-        document.getElementById('save').style.display = 'none';
-        document.getElementById('cancel').style.display = 'none';
-        document.getElementById('chooseImage').style.display = 'none';
-        contentElements.forEach(function(element) {
-            element.style.display = 'block';
-        });
-        editElements.forEach(function(element) {
-            element.style.display = 'none';
-        });
-    });
-</script>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Lấy các phần tử DOM cần thiết
-        var chooseImageButton = document.getElementById("chooseImage");
-        var imageInput = document.getElementById("imageInput");
-        var previewImage = document.getElementById("preview-image");
-
-        // Sự kiện click cho button "Choose image"
-        chooseImageButton.addEventListener("click", function() {
-            imageInput.click(); // Kích hoạt sự kiện click trên input type=file
+    <script>
+        var contentElements = document.querySelectorAll('.content');
+        var editElements = document.querySelectorAll('.edit');
+        document.getElementById('editButton').addEventListener('click', function() {
+            document.getElementById('save').style.display = 'block';
+            document.getElementById('cancel').style.display = 'block';
+            document.getElementById('chooseImage').style.display = 'block';
+            contentElements.forEach(function(element) {
+                element.style.display = 'none';
+            });
+            editElements.forEach(function(element) {
+                element.style.display = 'block';
+            });
         });
 
-        // Sự kiện khi có thay đổi trong input type=file
-        imageInput.addEventListener("change", function() {
-            var file = this.files[0]; // Lấy file đầu tiên từ danh sách các file được chọn
-            if (file) {
-                // Đọc file hình ảnh dưới dạng URL
-                var reader = new FileReader();
-                reader.onload = function(event) {
-                    // Hiển thị hình ảnh đã chọn lên thẻ <img>
-                    previewImage.src = event.target.result;
-                };
-                reader.readAsDataURL(file); // Đọc file dưới dạng URL Data
-                console.log(reader);
+        document.getElementById('cancel').addEventListener('click', function() {
+            document.getElementById('save').style.display = 'none';
+            document.getElementById('cancel').style.display = 'none';
+            document.getElementById('chooseImage').style.display = 'none';
+            contentElements.forEach(function(element) {
+                element.style.display = 'block';
+            });
+            editElements.forEach(function(element) {
+                element.style.display = 'none';
+            });
+        });
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Lấy các phần tử DOM cần thiết
+            var chooseImageButton = document.getElementById("chooseImage");
+            var imageInput = document.getElementById("imageInput");
+            var previewImage = document.getElementById("preview-image");
+
+            // Sự kiện click cho button "Choose image"
+            chooseImageButton.addEventListener("click", function() {
+                imageInput.click(); // Kích hoạt sự kiện click trên input type=file
+            });
+
+            // Sự kiện khi có thay đổi trong input type=file
+            imageInput.addEventListener("change", function() {
+                var file = this.files[0]; // Lấy file đầu tiên từ danh sách các file được chọn
+                if (file) {
+                    // Đọc file hình ảnh dưới dạng URL
+                    var reader = new FileReader();
+                    reader.onload = function(event) {
+                        // Hiển thị hình ảnh đã chọn lên thẻ <img>
+                        previewImage.src = event.target.result;
+                    };
+                    reader.readAsDataURL(file); // Đọc file dưới dạng URL Data
+                }
+            });
+        });
+    </script>
+
+    <script>
+        var element = document.getElementById('menudropdown');
+
+        document.getElementById('btndropdown').addEventListener('click', function() {
+            var display = window.getComputedStyle(element).getPropertyValue('display');
+            if (display === 'none') {
+                element.style.display = 'block'; // Hiển thị phần tử nếu nó đang ẩn
+            } else {
+                element.style.display = 'none'; // Ẩn phần tử nếu nó đang hiển thị
             }
         });
-    });
-</script>
+    </script>
 
-<script>
-    var element = document.getElementById('menudropdown');
-
-    document.getElementById('btndropdown').addEventListener('click', function() {
-        var display = window.getComputedStyle(element).getPropertyValue('display');
-        if (display === 'none') {
-            element.style.display = 'block'; // Hiển thị phần tử nếu nó đang ẩn
-        } else {
-            element.style.display = 'none'; // Ẩn phần tử nếu nó đang hiển thị
+    <script>
+        function formatNumber(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         }
-    });
-</script>
 
-<script>
-    function formatNumber(number) {
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-    }
+        window.addEventListener('DOMContentLoaded', function() {
+            var elements = document.querySelectorAll(
+                '.priceDisplay'); // Lấy tất cả các phần tử có class là 'priceDisplay'
 
-    window.addEventListener('DOMContentLoaded', function() {
-        var elements = document.querySelectorAll(
-            '.priceDisplay'); // Lấy tất cả các phần tử có class là 'priceDisplay'
-
-        elements.forEach(function(element) {
-            var inputNumber = element.innerText; // Lấy giá trị nội dung của phần tử
-            var formattedNumber = formatNumber(inputNumber); // Định dạng số
-            element.textContent = formattedNumber; // Gán nội dung đã định dạng vào phần tử
+            elements.forEach(function(element) {
+                var inputNumber = element.innerText; // Lấy giá trị nội dung của phần tử
+                var formattedNumber = formatNumber(inputNumber); // Định dạng số
+                element.textContent = formattedNumber; // Gán nội dung đã định dạng vào phần tử
+            });
         });
-    });
-</script>
-
-</html>
+    </script>
+@endsection

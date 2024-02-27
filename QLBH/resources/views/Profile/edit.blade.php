@@ -3,7 +3,7 @@
 @section('content')
     <div class="container rounded bg-white mt-5 mb-5">
         <div class="card-body">
-            <form action="{{ route('profile.edit1') }}" method="POST">
+            <form action="{{ route('profile.edit_admin') }}" method="POST">
                 @csrf
                 <div class="row">
                     <div class="col-md-3 border-right">

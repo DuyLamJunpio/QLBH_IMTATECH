@@ -4,11 +4,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatisticController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\VariantController;
 
 
 Route::get('trangchu', function () {
@@ -56,7 +59,8 @@ Route::group(['middleware' => 'web'], function () {
 
 
 Route::get('sanpham', [ProductController::class, 'show'])->name('User.products');
-Route::get('detail/{id}', [ProductController::class, 'showDetail'])->name('User.detailprod');
+Route::match(['GET', 'POST'], 'detail/{id}', [ProductController::class, 'showDetail'])->name('User.detailprod');
+Route::get('getcolor/{id}/{color}', [ProductController::class, 'getcolor'])->name('detailprod.getcolor');
 
 Route::middleware('admin')->group(function () {
     //products
@@ -64,6 +68,10 @@ Route::middleware('admin')->group(function () {
     Route::match(['GET', 'POST'], '/add', [ProductController::class, 'store'])->name('products.add');
     Route::match(['GET', 'POST'], '/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
     Route::get('delete/{id}', [ProductController::class, 'destroy'])->name('products.delete');
+    //variant
+    Route::match(['GET', 'POST'], '/variant/{id}', [VariantController::class, 'add'])->name('products.variant');
+    Route::match(['GET', 'POST'], '/variant_edit/{id}/{idProduct}', [VariantController::class, 'edit'])->name('products.variant.edit');
+    Route::get('delete_variant/{id}', [VariantController::class, 'destroy'])->name('products.variant.delete');
 
     //categories
     Route::get('/categories', [CategoriesController::class, 'index'])->name('categories.index');
@@ -84,15 +92,25 @@ Route::middleware('admin')->group(function () {
 
     //thong ke
     Route::get('/statistic', [StatisticController::class, 'index'])->name('statistic.index');
+    
+    //bill
+    Route::get('/bill', [BillController::class, 'index'])->name('bill.index');
+    Route::get('/bill/detail/{id}', [BillController::class, 'detail'])->name('bill.detail');
+    
+    // Route::get('/bill', function () {
+    //     return view('bill.index');
+    // })->name('bill.index');
+
+
 });
 // profile user
-Route::match(['GET', 'POST'], 'profile', [ProfileController::class, 'edit'])->name('profile');
 Route::get('user_profile', function () {
-    return view('User.file');
+    return view('User.profile.file');
 })->name('user_profile');
+Route::match(['GET', 'POST'], 'user_profile_edit', [ProfileController::class, 'edit'])->name('profile');
 Route::match(['GET', 'POST'], 'change_password', [ProfileController::class, 'change_pw'])->name('change_pw');
 Route::get('user_change_password', function () {
-    return view('User.change_pw');
+    return view('User.profile.change_pw');
 })->name('change_password');
 
 //order
@@ -100,6 +118,12 @@ Route::get('cart', function () {
     return view('User.cart');
 })->name('cart');
 Route::match(['GET', 'POST'], 'order/{id}', [OrderController::class, 'showDetail'])->name('order');
-Route::get('user_purchase', [OrderController::class, 'index'])->name('user_purchase');
+Route::match(['GET', 'POST'], 'orders', [OrderController::class, 'showOrder'])->name('orders');
+Route::get('user_purchase/{status}', [OrderController::class, 'index'])->name('user_purchase');
 Route::get('purchase/delete/{id}', [OrderController::class, 'destroy'])->name('user_purchase.delete');
-Route::post('post_bill', [OrderController::class, 'store'])->name('post_bill');
+Route::post('post_order', [OrderController::class, 'createOrder'])->name('order.create');
+
+//cart
+Route::post('add_cart/{idProduct}', [CartController::class, 'store'])->name('add_cart');
+Route::get('cart', [CartController::class, 'show'])->name('cart');
+Route::get('cart_delete/{id}', [CartController::class, 'destroy'])->name('cart.delete');

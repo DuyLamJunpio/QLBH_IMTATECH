@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('content')
-    <div class="container mt-5 overflow-auto" style="max-height: 600px">
+    <div class="container overflow-auto" style="max-height: 650px">
         <div class="card">
             <div class="card-header">
                 <div class="row">
@@ -27,7 +27,6 @@
                             <th class="text-center">Image</th>
                             <th class="text-center">Cost</th>
                             <th class="text-center">Price</th>
-                            <th class="text-center">Inventory</th>
                             <th class="text-center">Categories</th>
                             <th class="text-center">Description</th>
                             <th class="text-center">Tool</th>
@@ -41,14 +40,19 @@
                                 <td class="text-center"><img src="{{ Storage::url($item->image) }}" width="50" alt=""></td>
                                 <td class="text-center">{{ $item->cost }}</td>
                                 <td class="text-center">{{ $item->price }}</td>
-                                <td class="text-center">{{ $item->inventory }}</td>
                                 <td class="text-center">{{ $item->categories_name }}</td>
-                                <td class="text-center">{{ $item->description }}</td>
+                                <td class="text-center description-cell clickable" style="max-width: 200px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;">
+                                    <span class="description">{{ $item->description }}</span>
+                                    <button class="toggle-description">Xem thêm</button>
+                                </td>
                                 <td class="text-center">
-                                    <a href="{{ route('products.edit', ['id' => $item->id]) }}"
-                                        class="btn btn-primary">Sửa</a>
-                                    <a href="{{ route('products.delete', ['id' => $item->id]) }}"
-                                        class="btn btn-danger">Xoá</a>
+                                    <div class="d-grid gap-2">
+                                        <div class="d-flex">
+                                            <a href="{{ route('products.edit', ['id' => $item->id]) }}" class="btn btn-warning me-2">Sửa</a>
+                                            <a href="{{ route('products.delete', ['id' => $item->id]) }}" class="btn btn-danger">Xoá</a>
+                                        </div>
+                                        <a href="{{ route('products.variant', ['id' => $item->id]) }}" class="btn btn-info mt-2">Biến thể</a>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach

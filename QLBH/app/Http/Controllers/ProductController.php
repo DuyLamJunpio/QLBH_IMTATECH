@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\product_variants;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -33,10 +34,21 @@ class ProductController extends Controller
 
     public function showDetail(string $id)
     {
-        $product = Product::find($id)->join('categories', 'products.cat_id', '=', 'categories.id')
-        ->select('products.*', 'categories.name AS categories_name')
-        ->first();
-        return view("User.product.detailprod", compact("product"));
+        $product = DB::table('products')->join('categories', 'products.cat_id', '=', 'categories.id')
+            ->where('products.id', $id)
+            ->select('products.*', 'categories.name AS categories_name')
+            ->first();
+        $variants = product_variants::where('product_id', $id)->get();
+        return view("User.product.detailprod", compact("product", "variants"));
+    }
+
+    public function getcolor(string $id, string $color)
+    {
+        $sizes = product_variants::where([
+            ['product_id', $id],
+            ['color', $color]
+        ])->get();
+        return compact("sizes");
     }
 
     /**
@@ -55,7 +67,6 @@ class ProductController extends Controller
                 'name' => 'required|max:100',
                 'price' => 'required|integer',
                 'cost' => 'required|integer',
-                'inventory' => 'required|integer',
             ]);
             $params = $request->except('_token');
             if ($request->hasFile('image')) {
@@ -65,7 +76,7 @@ class ProductController extends Controller
             }
             $product = Product::create($params);
             if ($product->id) {
-                return redirect()->route('products.add')->with('success', 'Add product successfully!');
+                return redirect()->route('products.index')->with('success', 'Add product successfully!');
             }
         }
         return view('products.create', compact('categories'));
@@ -82,13 +93,14 @@ class ProductController extends Controller
     public function edit(Request $request, string $id)
     {
         $categories = DB::table("categories")->get();
-        $product = Product::find($id);
+        $product = Product::join('categories', 'products.cat_id', '=', 'categories.id')
+            ->select('products.*', 'categories.name AS categories_name')
+            ->find($id);
         if ($request->isMethod('POST')) {
             $validate = $request->validate([
                 'name' => 'required|max:100',
                 'price' => 'required|integer',
                 'cost' => 'required|integer',
-                'inventory' => 'required|integer',
             ]);
             $params = $request->except('_token');
             if ($request->hasFile('image')) {
@@ -103,7 +115,7 @@ class ProductController extends Controller
             }
             $result = $product->update($params);
             if ($result) {
-                return redirect()->route('products.edit', ['id' => $id])->with('success', 'Edit product successfully!');
+                return redirect()->route('products.index')->with('success', 'Edit product successfully!');
             }
         }
         return view('products.edit', compact('product', 'categories'));
