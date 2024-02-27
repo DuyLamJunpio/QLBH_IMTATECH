@@ -16,6 +16,9 @@ class Product extends Model
             'description',
             'cat_id',
             'cost',
-            'inventory',
         ];
+    public function category()
+    {
+        return $this->belongsTo(categories::class, 'category_id');
+    }
 }
