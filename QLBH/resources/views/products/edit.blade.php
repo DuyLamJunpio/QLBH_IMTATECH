@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('content')
-    <div class="container overflow-auto" style="max-height: 500px">
+    <div class="container overflow-auto" style="max-height: 650px">
         <div class="card">
             <div class="card-header">
                 <div class="row">
@@ -36,21 +36,16 @@
                                 <strong>Price</strong>
                                 <input type="number" name="price" class="form-control" placeholder="enter price" value="{{ $product->price }}">
                             </div>
-                            <div class="form-group">
-                                <strong>Inventory</strong>
-                                <input type="number" name="inventory" class="form-control" placeholder="enter inventory" value="{{ $product->inventory }}">
-                            </div>
-                            <div class="form-group">
-                                <strong>Description</strong>
-                                <input type="text" name="description" class="form-control"
-                                    placeholder="enter description" value="{{ $product->description }}">
-                            </div>
                             <strong>Categories</strong>
                             <select class="form-select mt-2" aria-label="Default select example" name="cat_id">
                                 @foreach ($categories as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                <option {{$product->categories_name == $item->name ? 'selected' : ''}} value="{{ $item->id }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
+                            <div class="form-group">
+                                <strong>Description</strong>
+                                <textarea class="form-control" placeholder="enter description" name="description">{{ $product->description }}</textarea>
+                            </div>
                         </div>
                         <button type='submit' class='btn btn-success mt-2'>Submit</button>
                     </div>

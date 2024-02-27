@@ -106,8 +106,8 @@
             <i class='bx bx-menu'></i>
             <span class="text">IMTA TECH</span>
         </div>
-        <div class="mt-5">
-            <div class="container mt-3">
+        <div>
+            <div class="container mt-2">
                 {{-- @if (session('success'))
                     <div class="alert alert-primary">
                         {{ session('success') }}

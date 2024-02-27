@@ -21,6 +21,6 @@ class AdminAuthenticate
         } else if (Auth::check() && Auth::user()->role == 0) {
             return redirect()->route("trangchu");
         }
-        return redirect()->route("login");
+        return redirect()->route("trangchu");
     }
 }
