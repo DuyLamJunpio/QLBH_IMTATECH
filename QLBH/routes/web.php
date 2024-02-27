@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatisticController;
@@ -61,6 +62,16 @@ Route::middleware('admin')->group(function () {
 
     //thong ke
     Route::get('/statistic', [StatisticController::class, 'index'])->name('statistic.index');
+    
+    //bill
+    Route::get('/bill', [BillController::class, 'index'])->name('bill.index');
+    Route::get('/bill/detail/{id}', [BillController::class, 'detail'])->name('bill.detail');
+    
+    // Route::get('/bill', function () {
+    //     return view('bill.index');
+    // })->name('bill.index');
+
+
 });
 // profile user
 Route::get('user_profile', function () {
