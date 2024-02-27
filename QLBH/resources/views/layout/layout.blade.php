@@ -96,7 +96,7 @@
                         </div>
                     </a>
 
-                    <a href="login"><i class='bx bx-log-out'></i></a>
+                    <a href="logout"><i class='bx bx-log-out'></i></a>
                 </div>
             </li>
         </ul>

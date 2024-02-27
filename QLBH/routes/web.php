@@ -10,22 +10,52 @@ use App\Http\Controllers\BillController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StatisticController;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\VariantController;
+
 
 Route::get('trangchu', function () {
     return view('User.home.home');
 })->name('trangchu');
 
-//Auth
-Route::controller(AuthController::class)->group(function () {
-    Route::get('register', 'register')->name('register');
-    Route::post('register', 'registerSave')->name('register.save');
 
-    Route::get('login', 'login')->name('login');
-    Route::post('login', 'loginAction')->name('login.action');
+// Route::middleware('guest')->group(function () {
+//     Route::get('register', [AuthController::class, 'register'])->name('register');
+//     Route::post('register', [AuthController::class, 'registerSave'])->name('register.save');
 
-    Route::get('logout', 'logout')->middleware('auth')->name('logout');
+//     Route::get('login', [AuthController::class, 'login'])->name('login');
+//     Route::post('login', [AuthController::class, 'loginAction'])->name('login.action');
+
+//     Route::get('logout',  [AuthController::class, 'logout'])->name('logout');
+
+// });
+
+
+// Route::group(['middleware' => 'prevent-back-history'],function(){
+// 	Auth::routes();
+// 	Route::get('/', [ProductController::class, 'index'])->name('products.index');
+// });
+
+Route::group(['middleware' => 'web'], function () {
+    Route::get('register', [AuthController::class, 'register'])->name('register');
+        Route::post('register', [AuthController::class, 'registerSave'])->name('register.save');
+    
+        Route::get('login', [AuthController::class, 'login'])->name('login');
+        Route::post('login', [AuthController::class, 'loginAction'])->name('login.action');
+    
+        Route::get('logout',  [AuthController::class, 'logout'])->name('logout');
 });
+
+//Auth
+// Route::controller(AuthController::class)->group(function () {
+//     Route::get('register', 'register')->name('register');
+//     Route::post('register', 'registerSave')->name('register.save');
+
+//     Route::get('login', 'login')->name('login')->middleware('guest');
+//     Route::post('login', 'loginAction')->name('login.action');
+
+//     Route::get('logout', 'logout')->name('logout');
+// });
 
 
 Route::get('sanpham', [ProductController::class, 'show'])->name('User.products');
@@ -34,7 +64,7 @@ Route::get('getcolor/{id}/{color}', [ProductController::class, 'getcolor'])->nam
 
 Route::middleware('admin')->group(function () {
     //products
-    Route::get('/', [ProductController::class, 'index'])->name('products.index');
+    Route::get('home', [ProductController::class, 'index'])->name('products.index');
     Route::match(['GET', 'POST'], '/add', [ProductController::class, 'store'])->name('products.add');
     Route::match(['GET', 'POST'], '/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
     Route::get('delete/{id}', [ProductController::class, 'destroy'])->name('products.delete');
