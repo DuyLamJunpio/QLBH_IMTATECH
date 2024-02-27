@@ -41,7 +41,7 @@
                                 </ul>
                                 <li class="list-group-item d-flex align-items-center p-3">
                                     <i class='bx bx-task text-success me-2'></i>
-                                    <a href="{{ route('user_purchase') }}" style="text-decoration: none;">Đơn mua</a>
+                                    <a href="{{ route('user_purchase',['status'=>'all']) }}" style="text-decoration: none;">Đơn mua</a>
                                 </li>
                                 <li class="list-group-item d-flex align-items-center p-3">
                                     <i class='bx bx-log-out text-danger me-2'></i>

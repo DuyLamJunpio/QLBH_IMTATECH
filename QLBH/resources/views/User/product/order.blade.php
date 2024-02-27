@@ -40,34 +40,36 @@
                                 </tr>
                             </thead>
                             <tbody class="border-0">
-                                <tr>
-                                    <th class="ps-0 py-3 border-0" scope="row">
-                                        <div class="d-flex align-items-center"><a
-                                                class="reset-anchor d-block animsition-link" href="detail.html"><img
-                                                    src="{{ Storage::url($product->image) }}" alt="..."
-                                                    width="70" /></a>
-                                            <div class="ms-3">
-                                                <strong class="h6">
-                                                    <a class="reset-anchor animsition-link"
-                                                        href="detail.html">{{ $product->name }}
-                                                    </a>
-                                                </strong>
-                                                <p class="text-muted">Color: <span>{{ $variant->color }}</span>, Size:
-                                                    <span>{{ $variant->size }}</span>
-                                                </p>
+                                @foreach ($carts as $item)
+                                    <tr>
+                                        <th class="ps-0 py-3 border-0" scope="row">
+                                            <div class="d-flex align-items-center"><a
+                                                    class="reset-anchor d-block animsition-link" href="detail.html"><img
+                                                        src="{{ Storage::url($item->image) }}" alt="..."
+                                                        width="70" /></a>
+                                                <div class="ms-3">
+                                                    <strong class="h6">
+                                                        <a class="reset-anchor animsition-link"
+                                                            href="detail.html">{{ $item->name }}
+                                                        </a>
+                                                    </strong>
+                                                    <p class="text-muted">Color: <span>{{ $item->color }}</span>, Size:
+                                                        <span>{{ $item->size }}</span>
+                                                    </p>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </th>
-                                    <td class="p-3 align-middle border-0 text-center">
-                                        <p class="priceDisplay mb-0 small">{{ $product->price }}</p>
-                                    </td>
-                                    <td class="p-3 align-middle border-0 text-center">
-                                        <p class="mb-0 small">{{ $quantity }}</p>
-                                    </td>
-                                    <td class="p-3 align-middle border-0 text-center">
-                                        <p class="priceDisplay mb-0 small">{{ $product->price * $quantity }}</p>
-                                    </td>
-                                </tr>
+                                        </th>
+                                        <td class="p-3 align-middle border-0 text-center">
+                                            <p class="price priceDisplay mb-0 small">{{ $item->price }}</p>
+                                        </td>
+                                        <td class="p-3 align-middle border-0 text-center">
+                                            <p class="quantityText  mb-0 small">{{ $selectedQuantities[$loop->index] }}</p>
+                                        </td>
+                                        <td class="p-3 align-middle border-0 text-center">
+                                            <p class="price_total priceDisplay mb-0 small"></p>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -136,18 +138,23 @@
                             <ul class="list-unstyled mb-0">
                                 <li class="d-flex align-items-center justify-content-between"><strong
                                         class="text-uppercase small font-weight-bold">Total payment
-                                        products</strong><span class="text-muted small">{{ $quantity }}</span></li>
+                                        products</strong><span class="text-muted small" id="total_prod">0</span></li>
                                 <li class="border-bottom my-2"></li>
                                 <li class="d-flex align-items-center justify-content-between mb-4"><strong
                                         class="text-uppercase small font-weight-bold">Total</strong><span
-                                        class="priceDisplay text-danger">{{ $product->price * $quantity }} VNĐ</span>
+                                        class="priceDisplay text-danger" id="totalPrice"></span>
                                 </li>
                                 <li>
                                     <form action="{{ route('order.create') }}" method="POST">
                                         @csrf
-                                        <input type="hidden" name="products[0][id]" value="{{ $product->id }}">
-                                        <input type="hidden" name="products[0][quantity]" value="{{ $quantity }}">
-                                        <input type="hidden" name="products[0][variant_id]" value="{{ $variant->id }}">
+                                        @foreach ($carts as $item)
+                                            <input type="hidden" name="products[{{ $loop->index }}][id]"
+                                                value="{{ $item->idProduct }}">
+                                            <input type="hidden" name="products[{{ $loop->index }}][quantity]"
+                                                value="{{ $selectedQuantities[$loop->index] }}">
+                                            <input type="hidden" name="products[{{ $loop->index }}][variant_id]"
+                                                value="{{ $item->idVariant }}">
+                                        @endforeach
                                         <div class="input-group mb-0">
                                             <button class="btn btn-warning btn-sm w-100 text-white fw-bold"
                                                 type="submit"> <i class="fas fa-gift me-2 text-white"></i>Place
@@ -178,5 +185,39 @@
                 element.textContent = formattedNumber; // Gán nội dung đã định dạng vào phần tử
             });
         });
+    </script>
+    <script>
+        var priceElements = document.querySelectorAll('.price');
+        var prices = Array.from(priceElements).map(function(element) {
+            return element.textContent; // or element.innerText
+        });
+
+        var quantityTexts = document.querySelectorAll('.quantityText');
+        var quantities = Array.from(quantityTexts).map(function(p) {
+            return p.textContent;
+        });
+        var totalPrices = quantities.map(function(quantity, i) {
+            return Number(quantity) * Number(prices[i]);
+        });
+
+        var totalPriceElements = document.querySelectorAll('.price_total');
+
+        totalPrices.forEach(function(totalPrice, i) {
+            if (totalPriceElements[i]) {
+                totalPriceElements[i].textContent = totalPrice;
+            }
+        });
+
+        var total = totalPrices.reduce(function(sum, i) {
+            return sum + Number(i);
+        }, 0);
+        document.getElementById('totalPrice').innerText = total + ' VNĐ';
+    </script>
+    <script>
+        var quantities = {!! json_encode($selectedQuantities) !!};
+        var total = quantities.reduce(function(sum, quantity) {
+            return sum + Number(quantity);
+        }, 0);
+        document.getElementById('total_prod').innerText = total;
     </script>
 @endsection

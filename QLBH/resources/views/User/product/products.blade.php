@@ -1,7 +1,7 @@
 @extends('User.home.index')
 @section('customer')
     <div class="modal fade" id="productView" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content overflow-hidden border-0">
                 <button class="btn-close p-4 position-absolute top-0 end-0 z-index-20 shadow-0" type="button"
                     data-bs-dismiss="modal" aria-label="Close"></button>
@@ -209,7 +209,8 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <h6> <a class="reset-anchor" href="detail.html">{{ $item->name }}</a></h6>
+                                        <h6> <a class="reset-anchor" href="detail.html">{{ Illuminate\Support\Str::limit($item->name, 30) }}
+                                        </a></h6>
                                         <p class="small text-muted">{{ $item->price }}</p>
                                     </div>
                                 </div>
